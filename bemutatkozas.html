@@ -1,88 +1,233 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-        <title>Document</title>
-        <script>
-            let hour = 0;
-            let minute = 0;
-            let second = 0;
-            const time = new Date();
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="./style.css" />
+    <title>Document</title>
+    <script>
+      function toggle_hidden(id) {
+        document.getElementById(id).classList.toggle('hidden');
+      }
+    </script>
+    <script>
+      function toggle_invisible(id) {
+        document.getElementById(id).classList.toggle('invisible');
+      }
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        let carousel = document.querySelector('.carousel');
+        let items = carousel.querySelectorAll('.item');
+        let dotsContainer = document.querySelector('.dots');
 
-            function set_time() {
-                hour = time.getHours();
-                minute = time.getMinutes();
-                second = time.getSeconds();
-                timeloop();
+        // Insert dots into the DOM
+        items.forEach((_, index) => {
+          let dot = document.createElement('span');
+          dot.classList.add('dot');
+          if (index === 0) dot.classList.add('active');
+          dot.dataset.index = index;
+          dotsContainer.appendChild(dot);
+        });
+
+        let dots = document.querySelectorAll('.dot');
+
+        // Function to show a specific item
+        function showItem(index) {
+          items.forEach((item, idx) => {
+            item.classList.remove('active');
+            dots[idx].classList.remove('active');
+            if (idx === index) {
+              item.classList.add('active');
+              dots[idx].classList.add('active');
             }
-            function padNumber(n) {
-                const str = "0" + n; // Prepend "0"
-                return str.slice(-2); // Slice last 2 characters
-            }
-            function displayTime() {
-                const display = document.getElementById("time");
-                display.innerHTML =
-                    padNumber(hour) +
-                    ":" +
-                    padNumber(minute) +
-                    ":" +
-                    padNumber(second);
-            }
-            function timeloop() {
-                displayTime();
-                second++;
-                if (second >= 60) {
-                    second -= 60;
-                    minute++;
-                    if (minute >= 60) {
-                        minute -= 60;
-                        hour++;
-                        if (hour >= 24) {
-                            hour -= 24;
-                            hour++;
-                        }
-                    }
-                }
-                setTimeout(timeloop, 1000);
-            }
-            set_time();
-        </script>
-        <script>
-            function toggle_invisible(id) {
-                document.getElementById(id).classList.toggle("invisible");
-            }
-        </script>
-    </head>
-    <body>
-        <div class="border-b-md bg-gray-500">
-            <nav>
-                <ul>
-                    <li><a href="./bemutatkozas.html">Link</a></li>
-                </ul>
-            </nav>
+          });
+        }
+
+        // Event listeners for buttons
+        document.querySelector('.prev').addEventListener('click', () => {
+          let index = [...items].findIndex((item) =>
+            item.classList.contains('active'),
+          );
+          showItem((index - 1 + items.length) % items.length);
+        });
+
+        document.querySelector('.next').addEventListener('click', () => {
+          let index = [...items].findIndex((item) =>
+            item.classList.contains('active'),
+          );
+          showItem((index + 1) % items.length);
+        });
+
+        // Event listeners for dots
+        dots.forEach((dot) => {
+          dot.addEventListener('click', () => {
+            let index = parseInt(dot.dataset.index);
+            showItem(index);
+          });
+        });
+      });
+    </script>
+  </head>
+  <body class="bg-green-200">
+    <div
+      class="sticky top-0 h-auto rounded-b-md bg-gray-500 py-2 text-center text-4xl"
+    >
+      <div class="flex justify-center">
+        <span
+          class="mx-5 rounded-xl border border-gray-400 bg-gray-400 px-1 hover:text-gray-300"
+        >
+          <a href="./index.html">Othhon</a>
+        </span>
+        <span
+          class="mx-5 rounded-xl border border-gray-400 bg-gray-400 px-1 hover:text-gray-300"
+        >
+          <a href="./bemutatkozas.html">Bemutatkozás</a>
+        </span>
+        <span
+          class="mx-5 rounded-xl border border-gray-400 bg-gray-400 px-1 hover:text-gray-300"
+        >
+          <a href="./tankolas.html">Tankolás</a>
+        </span>
+        <span id="time" class="float-right">99:99:99</span>
+      </div>
+    </div>
+    <script>
+      let hour = 0;
+      let minute = 0;
+      let second = 0;
+      function set_time() {
+        const time = new Date();
+        hour = time.getHours();
+        minute = time.getMinutes();
+        second = time.getSeconds() + 1;
+      }
+      function padNumber(n) {
+        const str = '0' + n;
+        return str.slice(-2);
+      }
+      function displayTime() {
+        const display = document.getElementById('time');
+        display.innerHTML =
+          padNumber(hour) + ':' + padNumber(minute) + ':' + padNumber(second);
+      }
+      function timeloop() {
+        displayTime();
+        set_time();
+        setTimeout(timeloop, 1000);
+      }
+      addEventListener('focus', timeloop());
+    </script>
+    <div>
+      <div class="text-center text-9xl py-10 font-bold">
+        <span class="text-shadow-lg">Kerti Pincék</span>
+      </div>
+      <div class="grid grid-cols-3 text-2xl">
+        <div class="col-span-1 m-auto">
+          <button
+            type="button"
+            onclick="toggle_hidden('Beni')"
+            class="w-auto bg-white tracking-wide text-gray-800 font-bold rounded border-b-2 border-purple-500 hover:border-purple-600 hover:bg-purple-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"
+          >
+            Kele Benjamin
+          </button>
         </div>
-        <div class="text-center text-9xl">Kerti Pincék</div>
-        <div class="grid grid-cols-3">
-            <div class="col-span-1">
-                <button type="button" onclick="toggle_invisible('Beni')">
-                    Kele Benjamin
-                </button>
-                <p id="Beni" class="invisible">bemutatk helye</p>
-            </div>
-            <div class="col-span-1">
-                <button type="button" onclick="toggle_invisible('Vince')">
-                    Kerti Vince
-                </button>
-                <p id="Vince" class="invisible">bemutatk helye</p>
-            </div>
-            <div class="col-span-1">
-                <button type="button" onclick="toggle_invisible('Marci')">
-                    Kámán Marcell
-                </button>
-                <p id="Marci" class="invisible">bemutatk helye</p>
-            </div>
+        <div class="col-span-1 m-auto">
+          <button
+            type="button"
+            onclick="toggle_hidden('Vince')"
+            class="w-auto bg-white tracking-wide text-gray-800 font-bold rounded border-b-2 border-blue-500 hover:border-blue-600 hover:bg-blue-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"
+          >
+            Kerti Vince
+          </button>
         </div>
-    </body>
+        <div class="col-span-1 m-auto">
+          <button
+            type="button"
+            onclick="toggle_hidden('Marci')"
+            class="w-auto bg-white tracking-wide text-gray-800 font-bold rounded border-b-2 border-green-500 hover:border-green-600 hover:bg-green-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"
+          >
+            Kámán Marcell
+          </button>
+        </div>
+      </div>
+      <div class="grid grid-cols-3">
+        <div class="col-span-1 m-auto">
+          <p
+            id="Beni"
+            class="hidden border-2 border-black text-white bg-purple-500/80 rounded-xl text-2xl mt-3 m-8 p-3"
+          >
+            Szeretem a programozást, és szeretném úgy gondolni, hogy jó is
+            vagyok bennne!
+          </p>
+        </div>
+        <div class="col-span-1 m-auto">
+          <p
+            id="Vince"
+            class="hidden border-2 border-gray-200 bg-white/80 rounded-xl text-2xl mt-3 p-3"
+          >
+            bemutatk helye
+          </p>
+        </div>
+        <div class="col-span-1 m-auto">
+          <p
+            id="Marci"
+            class="hidden border-2 border-gray-200 bg-white/80 rounded-xl text-2xl mt-3 p-3"
+          >
+            bemutatk helye
+          </p>
+        </div>
+      </div>
+      <div class="text-center text-4xl my-5">
+        Felkészítő tanárunk: Bende Attila
+      </div>
+      <div class="text-center text-4xl my-5">
+        Iskolánk neve: ZSZC Csány László Technikum
+      </div>
+      <div class="flex justify-center">
+        <button
+          onclick="
+            toggle_hidden('carouselInit');
+            toggle_invisible('carousel');
+          "
+          id="carouselInit"
+          class="m-5 text-3xl"
+        >
+          <span
+            class="bg-white tracking-wide text-gray-800 font-bold rounded border-b-2 border-yellow-500 hover:border-yellow-600 hover:bg-yellow-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"
+            >Katt rám!</span
+          >
+        </button>
+      </div>
+      <div
+        id="carousel"
+        class="carousel-container text-white pb-80 w-1/2 invisible"
+      >
+        <button class="next m-5 text-3xl">
+          <span
+            class="bg-white tracking-wide text-gray-800 font-bold rounded border-b-2 border-yellow-500 hover:border-yellow-600 hover:bg-yellow-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"
+            >Katt rám!</span
+          >
+        </button>
+        <button class="prev hidden">Next</button>
+        <div class="carousel aspect-auto">
+          <div class="item active">
+            <img src="./assets/DSC00466.JPG" alt="Image 1" />
+          </div>
+          <div class="item">
+            <img src="./assets/DSC00490.JPG" alt="Image 2" />
+          </div>
+          <div class="item">
+            <img src="./assets/DSC01597.png" alt="Image 3" />
+          </div>
+          <div class="item">
+            <img src="./assets/DSC02488.JPG" alt="Image 4" />
+          </div>
+        </div>
+
+        <div class="dots hidden"></div>
+      </div>
+    </div>
+  </body>
 </html>

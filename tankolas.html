@@ -1,19 +1,59 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-        <title>Document</title>
-    </head>
-    <body>
-        <div class="border-b-md bg-gray-500">
-            <nav>
-                <ul>
-                    <li><a href="./bemutatkozas.html">Link</a></li>
-                </ul>
-            </nav>
-        </div>
-        <div class="text-center text-9xl">Kerti Pincék</div>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Document</title>
+  </head>
+  <body class="bg-green-200">
+    <div
+      class="sticky top-0 h-auto rounded-b-md bg-gray-500 py-2 text-center text-4xl"
+    >
+      <div class="flex justify-center">
+        <span
+          class="mx-5 rounded-xl border border-gray-400 bg-gray-400 px-1 hover:text-gray-300"
+        >
+          <a href="./index.html">Othhon</a>
+        </span>
+        <span
+          class="mx-5 rounded-xl border border-gray-400 bg-gray-400 px-1 hover:text-gray-300"
+        >
+          <a href="./bemutatkozas.html">Bemutatkozás</a>
+        </span>
+        <span
+          class="mx-5 rounded-xl border border-gray-400 bg-gray-400 px-1 hover:text-gray-300"
+        >
+          <a href="./tankolas.html">Tankolás</a>
+        </span>
+        <span id="time" class="float-right">99:99:99</span>
+      </div>
+    </div>
+    <script>
+      let hour = 0;
+      let minute = 0;
+      let second = 0;
+      function set_time() {
+        const time = new Date();
+        hour = time.getHours();
+        minute = time.getMinutes();
+        second = time.getSeconds() + 1;
+      }
+      function padNumber(n) {
+        const str = '0' + n;
+        return str.slice(-2);
+      }
+      function displayTime() {
+        const display = document.getElementById('time');
+        display.innerHTML =
+          padNumber(hour) + ':' + padNumber(minute) + ':' + padNumber(second);
+      }
+      function timeloop() {
+        displayTime();
+        set_time();
+        setTimeout(timeloop, 1000);
+      }
+      addEventListener('focus', timeloop());
+    </script>
+  </body>
 </html>
