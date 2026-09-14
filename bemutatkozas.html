@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <title>Document</title>
+        <script>
+            let hour = 0;
+            let minute = 0;
+            let second = 0;
+            const time = new Date();
+
+            function set_time() {
+                hour = time.getHours();
+                minute = time.getMinutes();
+                second = time.getSeconds();
+                timeloop();
+            }
+            function padNumber(n) {
+                const str = "0" + n; // Prepend "0"
+                return str.slice(-2); // Slice last 2 characters
+            }
+            function displayTime() {
+                const display = document.getElementById("time");
+                display.innerHTML =
+                    padNumber(hour) +
+                    ":" +
+                    padNumber(minute) +
+                    ":" +
+                    padNumber(second);
+            }
+            function timeloop() {
+                displayTime();
+                second++;
+                if (second >= 60) {
+                    second -= 60;
+                    minute++;
+                    if (minute >= 60) {
+                        minute -= 60;
+                        hour++;
+                        if (hour >= 24) {
+                            hour -= 24;
+                            hour++;
+                        }
+                    }
+                }
+                setTimeout(timeloop, 1000);
+            }
+            set_time();
+        </script>
+        <script>
+            function toggle_invisible(id) {
+                document.getElementById(id).classList.toggle("invisible");
+            }
+        </script>
+    </head>
+    <body>
+        <div class="border-b-md bg-gray-500">
+            <nav>
+                <ul>
+                    <li><a href="./bemutatkozas.html">Link</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="text-center text-9xl">Kerti Pincék</div>
+        <div class="grid grid-cols-3">
+            <div class="col-span-1">
+                <button type="button" onclick="toggle_invisible('Beni')">
+                    Kele Benjamin
+                </button>
+                <p id="Beni" class="invisible">bemutatk helye</p>
+            </div>
+            <div class="col-span-1">
+                <button type="button" onclick="toggle_invisible('Vince')">
+                    Kerti Vince
+                </button>
+                <p id="Vince" class="invisible">bemutatk helye</p>
+            </div>
+            <div class="col-span-1">
+                <button type="button" onclick="toggle_invisible('Marci')">
+                    Kámán Marcell
+                </button>
+                <p id="Marci" class="invisible">bemutatk helye</p>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+        <title>Document</title>
+    </head>
+    <body>
+        <div
+            class="sticky top-0 h-auto rounded-b-md bg-gray-500 py-2 text-center text-4xl"
+        >
+            <div class="flex justify-center">
+                <span
+                    class="mx-5 rounded-xl border border-gray-400 bg-gray-400 px-1 hover:text-gray-300"
+                >
+                    <a href="./index.html">Othhon</a>
+                </span>
+                <span
+                    class="mx-5 rounded-xl border border-gray-400 bg-gray-400 px-1 hover:text-gray-300"
+                >
+                    <a href="./bemutatkozas.html">Bemutatkozás</a>
+                </span>
+                <span
+                    class="mx-5 rounded-xl border border-gray-400 bg-gray-400 px-1 hover:text-gray-300"
+                >
+                    <a href="./tankolas.html">Tankolás</a>
+                </span>
+                <span id="time" class="float-right">99:99:99</span>
+            </div>
+        </div>
+        <script>
+            let hour = 23;
+            let minute = 59;
+            let second = 57;
+            function set_time() {
+                const time = new Date();
+                hour = time.getHours();
+                minute = time.getMinutes();
+                second = time.getSeconds() + 1;
+            }
+            function padNumber(n) {
+                const str = "0" + n; // Prepend "0"
+                return str.slice(-2); // Slice last 2 characters
+            }
+            function displayTime() {
+                const display = document.getElementById("time");
+                display.innerHTML =
+                    padNumber(hour) +
+                    ":" +
+                    padNumber(minute) +
+                    ":" +
+                    padNumber(second);
+            }
+            function timeloop() {
+                displayTime();
+                set_time();
+                setTimeout(timeloop, 1000);
+            }
+            timeloop();
+        </script>
+    </body>
+</html>

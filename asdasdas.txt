@@ -1,0 +1,25 @@
+Beküldhető feladatok:
+1) Készítsetek a csapatotoknak egy weboldalt.
+a) Az oldalon jelenjenek meg a csapat adatai (tagok nevei, felkészítő tanár(ok) neve(i),
+iskola, valamint egy-egy fénykép).
+b) Az oldalon legyen egy óra is, ami mindig az aktuális időt mutatja.
+c) Az oldalon legyenek extra képek is, amik alapból nem látszódnak (lehet a csapatról,
+de lehet tájkép is). Legyen egy gomb, aminek a lenyomására megjelenik az első kép,
+majd ismételt lenyomására a következő kép, stb. Ha véget ért a "kivetítés", akkor a
+következő gombnyomás kezdje elölről.
+d) Minden csapattag nevéhez legyen egy gomb, amire rákattintva meg lehet tekinteni
+az illetőről egy rövid bemutatkozó szöveget. A gomb ismételt megnyomására a
+szöveg tűnjön el.
+100 0000|2 pont
+2) Készítsetek egy tankolások vezetésére alkalmas weboldalt.
+a) A honlap célja, hogy lehessen rögzíteni, mikor mennyi üzemanyagot tankoltunk az
+autónkba. Minden tankoláshoz rögzíteni kell a dátumot, a tankolt mennyiséget,
+valamint a fizetett összeget is.
+b) Az oldal írja ki hónapokra lebontva, hogy melyik hónapban mennyit költöttünk
+összesen tankolásra.
+c) Lehessen szűrni a tankolásokat két dátum közötti intervallumra.
+d) A tankolások mellé rögzíthessük a kilométer óra aktuális állását is.
+e) A honlap jelenítse meg, hogy az egymás utáni tankolások között mennyi kilométert
+mentünk és mennyi üzemanyagot fogyasztottunk el, és rangsorolja ezeket
+hatékonyság (átlagos fogyasztás) szerint. Feltehetjük, hogy tankoláskor mindig tele
+töltjük a tartályt.
