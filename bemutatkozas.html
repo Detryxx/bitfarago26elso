@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="./style.css" />
-    <title>Document</title>
+    <title>Kerti Pincék - Bemutatkozás</title>
     <script>
       function toggle_hidden(id) {
         document.getElementById(id).classList.toggle('hidden');
@@ -72,25 +72,30 @@
   </head>
   <body class="bg-green-200">
     <div
-      class="sticky top-0 h-auto rounded-b-md bg-gray-500 py-2 text-center text-4xl"
+      class="sticky top-0 h-auto rounded-b-md bg-gray-500 py-4 text-center text-4xl"
     >
-      <div class="flex justify-center">
-        <span
-          class="mx-5 rounded-xl border border-gray-400 bg-gray-400 px-1 hover:text-gray-300"
-        >
-          <a href="./index.html">Othhon</a>
-        </span>
-        <span
-          class="mx-5 rounded-xl border border-gray-400 bg-gray-400 px-1 hover:text-gray-300"
-        >
-          <a href="./bemutatkozas.html">Bemutatkozás</a>
-        </span>
-        <span
-          class="mx-5 rounded-xl border border-gray-400 bg-gray-400 px-1 hover:text-gray-300"
-        >
-          <a href="./tankolas.html">Tankolás</a>
-        </span>
-        <span id="time" class="float-right">99:99:99</span>
+      <div class="justify-center grid grid-cols-5">
+        <div class="col-span-1"></div>
+        <div class="col-span-3">
+          <span
+            class="mx-5 rounded-xl border border-gray-400 bg-gray-400 hover:text-gray-300"
+          >
+            <a href="./index.html">Othhon</a>
+          </span>
+          <span
+            class="mx-5 rounded-xl border border-gray-400 bg-gray-400 hover:text-gray-300"
+          >
+            <a href="./bemutatkozas.html">Bemutatkozás</a>
+          </span>
+          <span
+            class="mx-5 rounded-xl border border-gray-400 bg-gray-400 hover:text-gray-300"
+          >
+            <a href="./tankolas.html">Tankolás</a>
+          </span>
+        </div>
+        <div class="col-span-1">
+          <span id="time" class="float-right mr-8 text-gray-700">00:00:00</span>
+        </div>
       </div>
     </div>
     <script>
@@ -101,7 +106,7 @@
         const time = new Date();
         hour = time.getHours();
         minute = time.getMinutes();
-        second = time.getSeconds() + 1;
+        second = time.getSeconds();
       }
       function padNumber(n) {
         const str = '0' + n;
@@ -120,8 +125,20 @@
       addEventListener('focus', timeloop());
     </script>
     <div>
-      <div class="text-center text-9xl py-10 font-bold">
-        <span class="text-shadow-lg">Kerti Pincék</span>
+      <div class="text-center text-9xl py-10 font-bold grid grid-cols-5">
+        <div class="col-span-1">
+          <span></span>
+        </div>
+        <div class="col-span-3">
+          <span class="text-shadow-lg">Kerti Pincék</span>
+        </div>
+        <div class="col-span-1">
+          <img
+            src="./assets/csany_logo.png"
+            alt=""
+            class="float-right mx-5 col-span-1"
+          />
+        </div>
       </div>
       <div class="grid grid-cols-3 text-2xl">
         <div class="col-span-1 m-auto">
@@ -160,6 +177,7 @@
           >
             Szeretem a programozást, és szeretném úgy gondolni, hogy jó is
             vagyok bennne!
+            <img src="./assets/DSC07095.png" alt="" class="rounded-xl mt-5" />
           </p>
         </div>
         <div class="col-span-1 m-auto">
@@ -180,7 +198,12 @@
         </div>
       </div>
       <div class="text-center text-4xl my-5">
-        Felkészítő tanárunk: Bende Attila
+        <span>Felkészítő tanárunk: Bende Attila</span>
+        <img
+          src="./assets/Bende_Attila.jpeg"
+          alt=""
+          class="m-auto my-3 rounded-xl"
+        />
       </div>
       <div class="text-center text-4xl my-5">
         Iskolánk neve: ZSZC Csány László Technikum
