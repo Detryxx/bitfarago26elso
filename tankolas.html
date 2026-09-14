@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>Document</title>
+    <script>
+      function tankolasCalc() {
+        console.log(document.getElementById('tankolasSubmit').value);
+      }
+      document
+        .getElementById('tankolasForm')
+        .addEventListener('submit', function (event) {
+          event.preventDefault();
+          const formData = new FormData(event.target);
+          console.log(formData);
+          const username = formData.get('tankolasDate');
+          console.log('Submitted Username:', username);
+        });
+    </script>
   </head>
   <body class="bg-green-200">
     <div
@@ -60,5 +74,29 @@
       }
       addEventListener('focus', timeloop());
     </script>
+    <div>
+      <div class="m-auto text-center">
+        <span class="text-7xl">Tankolás Bevitel</span>
+        <div>
+          <form id="tankolasForm">
+            <label for="tankolasDate">Dátum:</label>
+            <input
+              type="date"
+              id="tankolasDate"
+              name="tankolasDate"
+              class="bg-gray-500 rounded-lg"
+            />
+            <label for="tankolasAmount">Mennyiség (liter):</label>
+            <input
+              type="float"
+              id="tankolasAmount"
+              name="tankolasAmount"
+              class="bg-gray-500 rounded-lg w-1/20 min-w-10"
+            />
+            <button type="submit" id="tankolasSubmit">Bevitel</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
