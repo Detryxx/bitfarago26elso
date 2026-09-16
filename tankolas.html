@@ -1,102 +1,91 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title>Document</title>
-    <script>
-      function tankolasCalc() {
-        console.log(document.getElementById('tankolasSubmit').value);
-      }
-      document
-        .getElementById('tankolasForm')
-        .addEventListener('submit', function (event) {
-          event.preventDefault();
-          const formData = new FormData(event.target);
-          console.log(formData);
-          const username = formData.get('tankolasDate');
-          console.log('Submitted Username:', username);
-        });
-    </script>
-  </head>
-  <body class="bg-green-200">
-    <div
-      class="sticky top-0 h-auto rounded-b-md bg-gray-500 py-4 text-center text-4xl"
-    >
-      <div class="justify-center grid grid-cols-5">
-        <div class="col-span-1"></div>
-        <div class="col-span-3">
-          <span
-            class="mx-5 rounded-xl border border-gray-400 bg-gray-400 hover:text-gray-300"
-          >
-            <a href="./index.html">Othhon</a>
-          </span>
-          <span
-            class="mx-5 rounded-xl border border-gray-400 bg-gray-400 hover:text-gray-300"
-          >
-            <a href="./bemutatkozas.html">Bemutatkozás</a>
-          </span>
-          <span
-            class="mx-5 rounded-xl border border-gray-400 bg-gray-400 hover:text-gray-300"
-          >
-            <a href="./tankolas.html">Tankolás</a>
-          </span>
-        </div>
-        <div class="col-span-1">
-          <span id="time" class="float-right mr-8 text-gray-700">00:00:00</span>
-        </div>
-      </div>
-    </div>
-    <script>
-      let hour = 0;
-      let minute = 0;
-      let second = 0;
-      function set_time() {
-        const time = new Date();
-        hour = time.getHours();
-        minute = time.getMinutes();
-        second = time.getSeconds() + 1;
-      }
-      function padNumber(n) {
-        const str = '0' + n;
-        return str.slice(-2);
-      }
-      function displayTime() {
-        const display = document.getElementById('time');
-        display.innerHTML =
-          padNumber(hour) + ':' + padNumber(minute) + ':' + padNumber(second);
-      }
-      function timeloop() {
-        displayTime();
-        set_time();
-        setTimeout(timeloop, 1000);
-      }
-      addEventListener('focus', timeloop());
-    </script>
-    <div>
-      <div class="m-auto text-center">
-        <span class="text-7xl">Tankolás Bevitel</span>
-        <div>
-          <form id="tankolasForm">
-            <label for="tankolasDate">Dátum:</label>
-            <input
-              type="date"
-              id="tankolasDate"
-              name="tankolasDate"
-              class="bg-gray-500 rounded-lg"
-            />
-            <label for="tankolasAmount">Mennyiség (liter):</label>
-            <input
-              type="float"
-              id="tankolasAmount"
-              name="tankolasAmount"
-              class="bg-gray-500 rounded-lg w-1/20 min-w-10"
-            />
-            <button type="submit" id="tankolasSubmit">Bevitel</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+		<title>Document</title>
+		<script src="time.js"></script>
+
+		
+	</head>
+	<body class="bg-green-200">
+		<div
+			class="sticky top-0 h-auto rounded-b-md bg-gray-500 py-4 text-center text-4xl"
+			>
+			<div class="justify-center grid grid-cols-5">
+				<div class="col-span-1"></div>
+				<div class="col-span-3">
+					<span
+					class="mx-5 rounded-xl border border-gray-400 bg-gray-400 hover:text-gray-300"
+					>
+						<a href="./index.html">Othhon</a>
+					</span>
+					<span
+					class="mx-5 rounded-xl border border-gray-400 bg-gray-400 hover:text-gray-300"
+					>
+						<a href="./bemutatkozas.html">Bemutatkozás</a>
+					</span>
+					<span
+					class="mx-5 rounded-xl border border-gray-400 bg-gray-400 hover:text-gray-300"
+					>
+						<a href="./tankolas.html">Tankolás</a>
+					</span>
+				</div>
+				<div class="col-span-1">
+					<span id="time" class="float-right mr-8 text-gray-700">00:00:00</span>
+				</div>
+			</div>
+		</div>
+		
+		<div>
+			<div class="m-auto text-center">
+				<span class="text-7xl">Tankolás Bevitel</span>
+				<div>
+					<form id="tankolasForm">
+						<label for="tankolasDate">Dátum:</label>
+						<input
+						type="date"
+						id="tankolasDate"
+						name="tankolasDate"
+							class="bg-gray-500 rounded-lg"
+							/>
+						<label for="tankolasAmount">Mennyiség (liter):</label>
+						<input
+						type="float"
+						id="tankolasAmount"
+						name="tankolasAmount"
+						class="bg-gray-500 rounded-lg w-1/20 min-w-10"
+						/>
+						<label for="tankloasOsszeg">Fizetett összeg</label>
+						<input
+						type="int"
+						id="tankolasCost"
+						name="tankolasCost"
+						class="bg-gray-500 rounded-lg w-1/20 min-w-10"
+						/>
+						<br/>
+						<button type="submit" id="tankolasSubmit">Bevitel</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<script>
+			function tankolasCalc() {
+				console.log(document.getElementById('tankolasSubmit').value);
+			}
+			document
+				.getElementById('tankolasForm')
+				.addEventListener('submit', function (event) {
+					event.preventDefault();
+					const formData = new FormData(event.target);
+					console.log(formData);
+					const date = formData.get('tankolasDate');// Miért username?????????
+					const amount = formData.get('tankolasAmount');
+					const cost = formData.get('tankolasCost');
+					console.log('Submitted DATA NOT USERNAME!!! HOW DID U COME UP WITH USERNAME HERE:', date,amount,cost);
+					storeData(date,amount,cost);
+				}); 
+		</script>
+	</body>
 </html>

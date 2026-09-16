@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
+    <script src="time.js"></script>
     <title>Document</title>
   </head>
   <body class="bg-green-200">
@@ -35,31 +35,6 @@
         </div>
       </div>
     </div>
-    <script>
-      let hour = 0;
-      let minute = 0;
-      let second = 0;
-      function set_time() {
-        const time = new Date();
-        hour = time.getHours();
-        minute = time.getMinutes();
-        second = time.getSeconds() + 1;
-      }
-      function padNumber(n) {
-        const str = '0' + n;
-        return str.slice(-2);
-      }
-      function displayTime() {
-        const display = document.getElementById('time');
-        display.innerHTML =
-          padNumber(hour) + ':' + padNumber(minute) + ':' + padNumber(second);
-      }
-      function timeloop() {
-        displayTime();
-        set_time();
-        setTimeout(timeloop, 1000);
-      }
-      addEventListener('focus', timeloop());
-    </script>
+    
   </body>
 </html>

@@ -6,69 +6,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="./style.css" />
     <title>Kerti Pincék - Bemutatkozás</title>
-    <script>
-      function toggle_hidden(id) {
-        document.getElementById(id).classList.toggle('hidden');
-      }
-    </script>
-    <script>
-      function toggle_invisible(id) {
-        document.getElementById(id).classList.toggle('invisible');
-      }
-    </script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        let carousel = document.querySelector('.carousel');
-        let items = carousel.querySelectorAll('.item');
-        let dotsContainer = document.querySelector('.dots');
-
-        // Insert dots into the DOM
-        items.forEach((_, index) => {
-          let dot = document.createElement('span');
-          dot.classList.add('dot');
-          if (index === 0) dot.classList.add('active');
-          dot.dataset.index = index;
-          dotsContainer.appendChild(dot);
-        });
-
-        let dots = document.querySelectorAll('.dot');
-
-        // Function to show a specific item
-        function showItem(index) {
-          items.forEach((item, idx) => {
-            item.classList.remove('active');
-            dots[idx].classList.remove('active');
-            if (idx === index) {
-              item.classList.add('active');
-              dots[idx].classList.add('active');
-            }
-          });
-        }
-
-        // Event listeners for buttons
-        document.querySelector('.prev').addEventListener('click', () => {
-          let index = [...items].findIndex((item) =>
-            item.classList.contains('active'),
-          );
-          showItem((index - 1 + items.length) % items.length);
-        });
-
-        document.querySelector('.next').addEventListener('click', () => {
-          let index = [...items].findIndex((item) =>
-            item.classList.contains('active'),
-          );
-          showItem((index + 1) % items.length);
-        });
-
-        // Event listeners for dots
-        dots.forEach((dot) => {
-          dot.addEventListener('click', () => {
-            let index = parseInt(dot.dataset.index);
-            showItem(index);
-          });
-        });
-      });
-    </script>
+    <script src="bemutatkozas.js"></script>
+    <script src="time.js"></script>
   </head>
   <body class="bg-green-200">
     <div
@@ -98,32 +37,7 @@
         </div>
       </div>
     </div>
-    <script>
-      let hour = 0;
-      let minute = 0;
-      let second = 0;
-      function set_time() {
-        const time = new Date();
-        hour = time.getHours();
-        minute = time.getMinutes();
-        second = time.getSeconds();
-      }
-      function padNumber(n) {
-        const str = '0' + n;
-        return str.slice(-2);
-      }
-      function displayTime() {
-        const display = document.getElementById('time');
-        display.innerHTML =
-          padNumber(hour) + ':' + padNumber(minute) + ':' + padNumber(second);
-      }
-      function timeloop() {
-        displayTime();
-        set_time();
-        setTimeout(timeloop, 1000);
-      }
-      addEventListener('focus', timeloop());
-    </script>
+    
     <div>
       <div class="text-center text-9xl py-10 font-bold grid grid-cols-5">
         <div class="col-span-1">
