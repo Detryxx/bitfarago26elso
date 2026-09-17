@@ -81,5 +81,27 @@ function erase_entry(date){
 }
 
 
+function listByMonths(data) {
+    let years = []
+    let result = {}
+    let months = {}
+
+    for (record in data) {
+        years.push(data[record]["date"].split("-")[0]);
+    }
+    const s = new Set(years);
+    unique_years = Array.from(s);
+
+    unique_years.forEach(year => {
+        let year_dict = {}
+        months = Object.fromEntries(Object.entries(data).filter(([key, value]) => value["date"].includes(year)))
+
+        result.push({year: months});
+    });
+
+    console.log(result)
+}
+
+
 
 
