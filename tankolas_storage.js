@@ -1,9 +1,10 @@
  
-function storeData(date, amount, cost) {
+function storeData(date, amount, cost, km = 100) {
     let record = {
         date: date,
         amount: amount,
-        cost: cost
+        cost: cost,
+        km: km
     }
 
     let tankolasok = JSON.parse(localStorage.getItem("tankolasok") || "[]")
@@ -51,9 +52,10 @@ function listing(){
 
             data[year][month].forEach(item =>{
                 table.innerHTML+=`<tr>
-                            <td class="w-1/3 text-center">${item["date"]}</td>
-                            <td class="w-1/3 text-center">${item["amount"]}</td>
-                            <td class="w-1/3 text-center">${item["cost"]}</td>
+                            <td class="w-1/4 text-center">${item["date"]}</td>
+                            <td class="w-1/4 text-center">${item["amount"]}</td>
+                            <td class="w-1/4 text-center">${item["cost"]}</td>
+                            <td class="w-1/4 text-center">${item["km"] | "n.a."}</td>
                             <td><button onclick="erase_entry('${item["date"]}')">X</button></td>
                         </tr>`
 
