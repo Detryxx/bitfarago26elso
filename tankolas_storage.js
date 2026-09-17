@@ -5,9 +5,18 @@ function storeData(date, amount, cost) {
         amount: amount,
         cost: cost
     }
-    data = JSON.stringify(record);
 
+    let tankolasok = JSON.parse(localStorage.getItem("tankolasok") || "[]")
+
+    tankolasok.push(record)
+    localStorage.setItem("tankolasok", JSON.stringify(tankolasok))
 }
+
+function getData() {
+    console.log(JSON.parse(localStorage.getItem("tankolasok")));
+}
+
+
 
 
 
