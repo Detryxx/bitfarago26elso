@@ -1,4 +1,4 @@
-
+ 
 function storeData(date, amount, cost) {
     let record = {
         date: date,
@@ -84,20 +84,30 @@ function erase_entry(date){
 function listByMonths(data) {
     let years = []
     let result = {}
-    let months = {}
+    
 
     for (record in data) {
-        years.push(data[record]["date"].split("-")[0]);
+        if (!years.includes(data[record]["date"].split("-")[0])) {
+            years.push(data[record]["date"].split("-")[0]);
+        }
     }
-    const s = new Set(years);
-    unique_years = Array.from(s);
 
-    unique_years.forEach(year => {
-        let year_dict = {}
-        months = Object.fromEntries(Object.entries(data).filter(([key, value]) => value["date"].includes(year)))
-
-        result.push({year: months});
+    years.forEach(year => {
+        result[year] = Object.fromEntries(Object.entries(data).filter(([key, value]) => value["date"].includes(year)))
     });
+
+    for (let key in result) {
+        let months = {}
+        for (let record in result[key]) {
+            if (!Object.keys(months).includes(result[key][record]["date"].split('-')[1])) {
+                months[result[key][record]["date"].split('-')[1]] = parseInt(result[key][record]["cost"])
+            }
+            else {
+                months[result[key][record]["date"].split('-')[1]] += parseInt(result[key][record]["cost"])
+            }
+        }
+        result[key] = months;
+    }
 
     console.log(result)
 }
