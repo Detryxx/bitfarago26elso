@@ -110,6 +110,7 @@ function listByMonths(data) {
     }
 
     console.log(result)
+    return result
 }
 
 
