@@ -10,6 +10,7 @@ function storeData(date, amount, cost) {
 
     tankolasok.push(record)
     localStorage.setItem("tankolasok", JSON.stringify(tankolasok))
+    listing()
 }
 
 function getData() {
@@ -33,19 +34,51 @@ function listing(){
     if (datemax.value!=""){
         data=data.filter((tankolas)=>new Date(tankolas["date"])<= new Date(datemax.value))
     }
+
+    data={"2026":{"05":[{"date":"2026-05-01"},{"date":"2026-05-02"}],"06":[{"date":"2026-05-03"}]},"3000":{"12":[{"date":"3000-12-01"},{"date":"3000-12-02"},{"date":"3000-12-03"}]}}
+
+
     console.log(data)
     list.innerHTML=""
-    for (i in data){
-        const item=data[i]
-        console.log(item)
-        list.innerHTML+=`<tr>
-					<td class="w-1/3 text-center">${item["date"]}</td>
-					<td class="w-1/3 text-center">${item["amount"]}</td>
-					<td class="w-1/3 text-center">${item["cost"]}</td>
-				</tr>`
-    }
+
+    for (year in data){
+        const ytext=document.createElement("p")
+        ytext.innerHTML=`${year}`
+        list.appendChild(ytext)
+        for (month in data[year]){
+            const table=document.createElement("table")   
+            "m-auto bg-gray-400 w-1/2 rounded-lg padding".split(" ").forEach(e => table.classList.add(e))
+
+            data[year][month].forEach(item =>{
+                table.innerHTML+=`<tr>
+                            <td class="w-1/3 text-center">${item["date"]}</td>
+                            <td class="w-1/3 text-center">${item["amount"]}</td>
+                            <td class="w-1/3 text-center">${item["cost"]}</td>
+                            <td><button onclick="erase_entry('${item["date"]}')">X</button></td>
+                        </tr>`
+
+            })
+
+            const text=document.createElement("p")
+            text.innerHTML=`${month}`
+
+            list.appendChild(text)
+            list.appendChild(table)
+    }};
+    
 }
 
+function erase_entry(date){
+    let data=getData();
+    console.log(date)
+    for (n in data){
+        const item=data[n]
+        if(item["date"]==date){
+            data.pop(n)
+            break
+        }
+    }
+}
 
 
 
