@@ -5,8 +5,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 		<title>Document</title>
-		<script src="time.js"></script>
 		<script src="tankolas_storage.js"></script>
+		<script src="time.js"></script>
 		<link rel="stylesheet" href="style.css"/>
 		<script
             type="text/javascript"
@@ -27,7 +27,7 @@
         />
 
 	</head>
-	<body class="bg-green-200">
+	<body class="bg-linear-to-r from-green-200 from-30% via-purple-200 via-60% to-amber-200">
 		<div
 			class="sticky top-0 h-auto rounded-b-md bg-gray-500 py-4 text-center text-4xl"
 			>
@@ -36,29 +36,23 @@
 				<div class="col-span-3">
 					<span
 					class="mx-5 rounded-xl border border-gray-400 bg-gray-400 hover:text-gray-300"
-					>
-						<a href="./index.html">Othhon</a>
-					</span>
+					><a href="./index.html">Othhon</a></span>
 					<span
-					class="mx-5 rounded-xl border border-gray-400 bg-gray-400 hover:text-gray-300"
-					>
-						<a href="./bemutatkozas.html">Bemutatkozás</a>
-					</span>
+					class="mx-5 px-3 rounded-xl border border-gray-400 bg-gray-400 hover:text-gray-300"
+					><a href="./bemutatkozas.html">Bemutatkozás</a></span>
 					<span
-					class="mx-5 rounded-xl border border-gray-400 bg-gray-400 hover:text-gray-300"
-					>
-						<a href="./tankolas.html">Tankolás</a>
-					</span>
+					class="mx-5 px-3 rounded-xl border border-gray-400 bg-gray-400 hover:text-gray-300"
+					><a href="./tankolas.html">Tankolás</a></span>
 				</div>
 				<div class="col-span-1">
-					<span id="time" class="float-right mr-8 text-gray-700">00:00:00</span>
+					<span id="time" class="float-right mr-8 text-slate-100">00:00:00</span>
 				</div>
 			</div>
 		</div>
 
 		<div>
 			<div class="m-auto text-center">
-				<span class="text-7xl">Tankolás Bevitel</span>
+				<span class="text-7xl mx-5">Tankolás Bevitel</span>
 				<div>
 					<form id="tankolasForm">
 						<label for="tankolasDate">Dátum:</label>
@@ -88,7 +82,7 @@
 				</div>
 			</div>
 		</div>
-		<input type="text" name="daterange" value="01/01/2018 - 01/15/2018" id="tankolasRange"/>
+		<input type="text" name="datefilter" value="01/01/2018 - 01/15/2018" id="tankolasRange" class=""/>
 		<div id="tankolasList" class="m-auto text-center">
 			<table class="m-auto bg-gray-400 w-1/2 rounded-lg padding">
 
@@ -121,13 +115,24 @@
 					storeData(date,amount,cost);
 				});
 			$(function() {
-                $('input[name="daterange"]').daterangepicker({
-                  opens: 'left'
-                }, function(s, e, label) {
-                  start=s
-                  end=e
-                  console.log("A new date selection was made: " + s.format('YYYY-MM-DD') + ' to ' + e.format('YYYY-MM-DD'));
-                });
+
+  $('input[name="datefilter"]').daterangepicker({
+      autoUpdateInput: false,
+      locale: {
+          cancelLabel: 'Clear'
+      }
+  });
+
+  $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+      $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+      listing()
+  });
+
+  $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
+      $(this).val('');
+      listing();
+  });
+
 			});
 
 			listing()
