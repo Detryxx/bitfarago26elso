@@ -36,8 +36,7 @@ function listing(){
         data=data.filter((tankolas)=>new Date(tankolas["date"])<= new Date(datemax.value))
     }
 
-    data={"2026":{"05":[{"date":"2026-05-01"},{"date":"2026-05-02"}],"06":[{"date":"2026-05-03"}]},"3000":{"12":[{"date":"3000-12-01"},{"date":"3000-12-02"},{"date":"3000-12-03"}]}}
-
+    data=listByMonths(data)
 
     console.log(data)
     list.innerHTML=""
@@ -102,10 +101,11 @@ function listByMonths(data) {
         let months = {}
         for (let record in result[key]) {
             if (!Object.keys(months).includes(result[key][record]["date"].split('-')[1])) {
-                months[result[key][record]["date"].split('-')[1]] = parseInt(result[key][record]["cost"])
+                months[result[key][record]["date"].split('-')[1]] = []
+                months[result[key][record]["date"].split('-')[1]].push(result[key][record])
             }
             else {
-                months[result[key][record]["date"].split('-')[1]] += parseInt(result[key][record]["cost"])
+                months[result[key][record]["date"].split('-')[1]].push(result[key][record])
             }
         }
         result[key] = months;
