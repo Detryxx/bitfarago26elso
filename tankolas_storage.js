@@ -59,6 +59,7 @@ function listing() {
 	console.log(data);
 	list.innerHTML = "";
 
+<<<<<<< HEAD
 	for (year in data) {
 		const ytext = document.createElement("p");
 		ytext.innerHTML = `${year}`;
@@ -71,6 +72,23 @@ function listing() {
 
 			data[year][month].forEach((item) => {
 				table.innerHTML += `<tr>
+=======
+    data=listByMonths(data)
+
+    console.log(data)
+    list.innerHTML=""
+
+    for (year in data){
+        const ytext=document.createElement("p")
+        ytext.innerHTML=`${year}`
+        list.appendChild(ytext)
+        for (month in data[year]){
+            const table=document.createElement("table")   
+            "m-auto bg-gray-400 w-1/2 rounded-lg padding".split(" ").forEach(e => table.classList.add(e))
+
+            data[year][month].forEach(item =>{
+                table.innerHTML+=`<tr>
+>>>>>>> 1b2643d504890937fff5e7d88e130c6b38964405
                             <td class="w-1/4 text-center">${item["date"]}</td>
                             <td class="w-1/4 text-center">${item["amount"]}</td>
                             <td class="w-1/4 text-center">${item["cost"]}</td>
@@ -118,6 +136,7 @@ function listByMonths(data) {
 		);
 	});
 
+<<<<<<< HEAD
 	for (let key in result) {
 		let months = {};
 		for (let record in result[key]) {
@@ -135,6 +154,21 @@ function listByMonths(data) {
 		}
 		result[key] = months;
 	}
+=======
+    for (let key in result) {
+        let months = {}
+        for (let record in result[key]) {
+            if (!Object.keys(months).includes(result[key][record]["date"].split('-')[1])) {
+                months[result[key][record]["date"].split('-')[1]] = []
+                months[result[key][record]["date"].split('-')[1]].push(result[key][record])
+            }
+            else {
+                months[result[key][record]["date"].split('-')[1]].push(result[key][record])
+            }
+        }
+        result[key] = months;
+    }
+>>>>>>> 1b2643d504890937fff5e7d88e130c6b38964405
 
 	console.log(result);
 	return result;
