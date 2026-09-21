@@ -8,7 +8,24 @@
 		<script src="time.js"></script>
 		<script src="tankolas_storage.js"></script>
 		<link rel="stylesheet" href="style.css"/>
-		
+		<script
+            type="text/javascript"
+            src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
+        ></script>
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"
+        />
+
 	</head>
 	<body class="bg-green-200">
 		<div
@@ -38,7 +55,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div>
 			<div class="m-auto text-center">
 				<span class="text-7xl">Tankolás Bevitel</span>
@@ -71,21 +88,10 @@
 				</div>
 			</div>
 		</div>
-		<input
-			type="date"
-			id="tankolasFiltermax"
-			name="tankolasDate"
-				class="bg-gray-500 rounded-lg"
-				/>
-		<input
-			type="date"
-			id="tankolasFiltermin"
-			name="tankolasDate"
-				class="bg-gray-500 rounded-lg"
-				/>
+		<input type="text" name="daterange" value="01/01/2018 - 01/15/2018" id="tankolasRange"/>
 		<div id="tankolasList" class="m-auto text-center">
 			<table class="m-auto bg-gray-400 w-1/2 rounded-lg padding">
-				
+
 				<tr>
 					<td class="w-1/3 text-center">2026-00-00</td>
 					<td class="w-1/3 text-center">10000FT</td>
@@ -113,7 +119,17 @@
 					const cost = formData.get('tankolasCost');
 					console.log('Submitted DATA NOT USERNAME!!! HOW DID U COME UP WITH USERNAME HERE:', date,amount,cost);
 					storeData(date,amount,cost);
-				}); 
+				});
+			$(function() {
+                $('input[name="daterange"]').daterangepicker({
+                  opens: 'left'
+                }, function(s, e, label) {
+                  start=s
+                  end=e
+                  console.log("A new date selection was made: " + s.format('YYYY-MM-DD') + ' to ' + e.format('YYYY-MM-DD'));
+                });
+			});
+
 			listing()
 		</script>
 	</body>
