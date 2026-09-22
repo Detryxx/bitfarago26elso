@@ -7,12 +7,19 @@ function storeData(date, amount, cost, km = 100) {
 		cost: cost,
 		km: km,
 	};
+	let is_filled=true
+	for (e in record){
+		if (!record[e]){
+			return
+		}
+	}
 
-	let tankolasok = JSON.parse(localStorage.getItem("tankolasok") || "[]");
-
-	tankolasok.push(record);
-	localStorage.setItem("tankolasok", JSON.stringify(tankolasok));
-	listing();
+		let tankolasok = JSON.parse(localStorage.getItem("tankolasok") || "[]");
+		
+		tankolasok.push(record);
+		localStorage.setItem("tankolasok", JSON.stringify(tankolasok));
+		listing();
+	
 }
 
 function getData() {
@@ -204,7 +211,8 @@ function erase_entry(delItem) {
 		const item = data[n];
 		console.log("erase",delItem,item);
 		if (JSON.stringify(item) == JSON.stringify(delItem)) {
-			console.log(data.pop(n),delItem);
+			data.splice(n,1)
+			console.log(delItem,data,n);
 			break;
 		}
 	}
