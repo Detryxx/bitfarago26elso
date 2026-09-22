@@ -131,7 +131,7 @@ function list_by_time() {
                             <td class="w-1/4 text-center">${item["amount"]} L</td>
                             <td class="w-1/4 text-center">${item["cost"]} Ft</td>
                             <td class="w-1/4 text-center">${item["km"]}${difference_text} km</td>
-                            <td><button onclick='erase_entry(${JSON.stringify(item)})'>X</button></td>
+                            <td><button type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5 cursor-pointer" onclick='erase_entry(${JSON.stringify(item)})'><span class="material-symbols-outlined">delete</span></button></td>
                         </tr>`;
 					
 				sum += parseInt(item["cost"]);
