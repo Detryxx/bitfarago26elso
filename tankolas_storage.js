@@ -1,3 +1,5 @@
+let listEfficiency=false
+
 function storeData(date, amount, cost, km = 100) {
 	let record = {
 		date: date,
@@ -14,11 +16,34 @@ function storeData(date, amount, cost, km = 100) {
 }
 
 function getData() {
-	const res = JSON.parse(localStorage.getItem("tankolasok"));
+	let res = JSON.parse(localStorage.getItem("tankolasok"));
+	if (res){
+		
+		res=res.sort((a,b)=>{
+			if (new Date(a["date"])<new Date(b["date"])){return -1}
+			if (new Date(a["date"])>new Date(b["date"])){return 1}
+			return 0
+		})
+	}//MAJDNEM RAGEQUITELTEM BAZMGE A JAVASCRIPT FOLYTON ÚGY DÖNTÖTT HOGY CSAK ÚGY IGNORÁLJA A SORTOLÁST
+	// console.log("getdata sorted",res)
 	return res ? res : [];
 }
 
-function listing() {
+function listing(type=-1){
+	if(type==-1){
+		if(listEfficiency){
+			list_by_efficiency()
+		} else{
+			list_by_time()
+		}
+	} else{
+		listEfficiency=type!=0
+		listing()
+		
+	}
+}
+
+function list_by_time() {
 	let data = getData();
 	const list = document.getElementById("tankolasList");
 	const datestart = document
@@ -27,16 +52,17 @@ function listing() {
 	const dateend = document
 		.getElementById("tankolasRange")
 		.value.split(" - ")[1];
-	console.log(datestart, dateend);
+	
+	// console.log("dates",datestart, dateend);
 
-	console.log(data);
+	// console.log(data);
 
-	if (datestart != "") {
+	if (datestart) {
 		data = data.filter(
 			(tankolas) => new Date(tankolas["date"]) >= new Date(datestart),
 		);
 	}
-	if (dateend != "") {
+	if (dateend) {
 		data = data.filter(
 			(tankolas) => new Date(tankolas["date"]) <= new Date(dateend),
 		);
@@ -56,13 +82,13 @@ function listing() {
 	// 	},
 	// };
 
-	console.log(data);
+	// console.log(data);
 	list.innerHTML = "";
 
 	data = listByMonths(data);
 
-	console.log(data);
-	list.innerHTML = "";
+	let last_distance=0
+	let first_item=true
 
 	for (year in data) {
 		const ytext = document.createElement("p");
@@ -71,23 +97,41 @@ function listing() {
 		for (month in data[year]) {
 			let sum = 0;
 			const table = document.createElement("table");
-			"m-auto bg-gray-400 w-1/2 rounded-lg padding"
+			"m-auto bg-gray-400 w-3/4 rounded-lg padding"
 				.split(" ")
 				.forEach((e) => table.classList.add(e));
-
+			
+				
 			data[year][month].forEach((item) => {
+					let difference_text=""
+					if (first_item){
+						first_item=false
+					} else{
+						const diff=parseInt(item["km"])-last_distance
+
+						if (diff>0){
+							difference_text=`(+${diff})`
+
+						}else if(diff<0){
+							difference_text=`(${diff}, nem kéne megbűvölni a km órát)`
+						}
+
+					}
+					last_distance=parseInt(item["km"])
+				
 				table.innerHTML += `<tr>
                             <td class="w-1/4 text-center">${item["date"]}</td>
-                            <td class="w-1/4 text-center">${item["amount"]}</td>
-                            <td class="w-1/4 text-center">${item["cost"]}</td>
-                            <td class="w-1/4 text-center">${item["km"]}</td>
-                            <td><button onclick="erase_entry('${item["date"]}')">X</button></td>
+                            <td class="w-1/4 text-center">${item["amount"]} L</td>
+                            <td class="w-1/4 text-center">${item["cost"]} Ft</td>
+                            <td class="w-1/4 text-center">${item["km"]}${difference_text} km</td>
+                            <td><button onclick='erase_entry(${JSON.stringify(item)})'>X</button></td>
                         </tr>`;
-				sum += item["cost"];
+					
+				sum += parseInt(item["cost"]);
 			});
 
 			const text = document.createElement("p");
-			text.innerHTML = `${month} - ${sum}`;
+			text.innerHTML = `${month} - ${sum} Ft`;
 
 			list.appendChild(text);
 			list.appendChild(table);
@@ -95,21 +139,82 @@ function listing() {
 	}
 }
 
-function erase_entry(date) {
+function list_by_efficiency(){
 	let data = getData();
-	console.log(date);
+	const list = document.getElementById("tankolasList");
+	const datestart = document
+		.getElementById("tankolasRange")
+		.value.split(" - ")[0];
+	const dateend = document
+		.getElementById("tankolasRange")
+		.value.split(" - ")[1];
+	
+	// console.log("dates",datestart, dateend);
+
+	// console.log(data);
+
+	if (datestart) {
+		data = data.filter(
+			(tankolas) => new Date(tankolas["date"]) >= new Date(datestart),
+		);
+	}
+	if (dateend) {
+		data = data.filter(
+			(tankolas) => new Date(tankolas["date"]) <= new Date(dateend),
+		);
+	}
+	let last_distance=0
+	for (e in data){
+		data[e]["diff"]=parseInt(data[e]["km"]) - last_distance
+		last_distance=parseInt(data[e]["km"])
+	}
+
+	const sorted=data.sort((a,b)=>{
+		if (parseInt(a["amount"])/parseInt(a["diff"])>parseInt(b["amount"])/parseInt(b["diff"]))return 1
+		if (parseInt(a["amount"])/parseInt(a["diff"])<parseInt(b["amount"])/parseInt(b["diff"]))return -1
+		return 0
+	})
+	list.innerHTML=""
+	const table=document.createElement("table")
+	"m-auto bg-gray-400 w-3/4 rounded-lg padding".split(" ").forEach((e) => table.classList.add(e));
+	console.log(sorted)
+	sorted.forEach((item)=>{
+		if ((parseInt(item["amount"])/parseInt(item["diff"]))!=Infinity){
+			let clear_button_item={...item} //ez elvileg copy
+			delete clear_button_item["diff"]
+			table.innerHTML += `<tr>
+	
+                            <td class="w-1/5 text-center">${item["date"]}</td>
+                            <td class="w-1/5 text-center">${item["amount"]} L</td>
+                            <td class="w-1/5 text-center">${item["cost"]} Ft</td>
+                            <td class="w-1/5 text-center">${item["km"]}(${item["diff"]}) km</td>
+                            <td class="w-1/5 text-center">${
+								Math.round(
+								parseInt(item["amount"])/parseInt(item["diff"])*1000)/1000
+							}L/km</td>
+                            <td><button onclick='erase_entry(${JSON.stringify(clear_button_item)})'>X</button></td>
+                        </tr>`;}
+	})
+	list.appendChild(table)
+}
+
+function erase_entry(delItem) {
+	let data = getData();
 	for (n in data) {
 		const item = data[n];
-		if (item["date"] == date) {
-			data.pop(n);
+		console.log("erase",delItem,item);
+		if (JSON.stringify(item) == JSON.stringify(delItem)) {
+			console.log(data.pop(n),delItem);
 			break;
 		}
 	}
+	localStorage.setItem("tankolasok", JSON.stringify(data));
 	listing();
 }
 
 function clear() {
 	localStorage.removeItem("tankolasok");
+	
 	listing();
 }
 function cleardate() {
@@ -156,3 +261,4 @@ function listByMonths(data) {
 	console.log(result);
 	return result;
 }
+

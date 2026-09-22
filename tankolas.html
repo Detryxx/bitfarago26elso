@@ -76,13 +76,22 @@
 						name="tankolasCost"
 						class="bg-gray-500 rounded-lg w-1/20 min-w-10"
 						/>
+						<label for="tankloasOsszeg">Km óra állása</label>
+						<input
+						type="int"
+						id="tankolasDistance"
+						name="tankolasDistance"
+						class="bg-gray-500 rounded-lg w-1/20 min-w-10"
+						/>
 						<br/>
 						<button type="submit" id="tankolasSubmit">Bevitel</button>
 					</form>
 				</div>
 			</div>
 		</div>
-		<input type="text" name="datefilter" value="01/01/2018 - 01/15/2018" id="tankolasRange" class=""/>
+		<input type="text" name="datefilter" value="" id="tankolasRange" class=""/>
+		<button onclick="listing(0)">listázás idő szerint</button>
+		<button onclick="listing(1)">listázás hatékonyság szerint</button>
 		<div id="tankolasList" class="m-auto text-center">
 			<table class="m-auto bg-gray-400 w-1/2 rounded-lg padding">
 
@@ -111,8 +120,9 @@
 					const date = formData.get('tankolasDate');// Miért username?????????
 					const amount = formData.get('tankolasAmount');
 					const cost = formData.get('tankolasCost');
+					const distance = formData.get('tankolasDistance');//nemtom miaz hogy km óra állás angolul úgyhogy lesz helyette distance
 					console.log('Submitted DATA NOT USERNAME!!! HOW DID U COME UP WITH USERNAME HERE:', date,amount,cost);
-					storeData(date,amount,cost);
+					storeData(date,amount,cost,distance);
 				});
 			$(function() {
 
