@@ -1,256 +1,213 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="./style.css" />
-    <title>Kerti Pincék - Bemutatkozás</title>
-    <script>
-      function toggle_hidden(id) {
-        document.getElementById(id).classList.toggle('hidden');
-      }
-    </script>
-    <script>
-      function toggle_invisible(id) {
-        document.getElementById(id).classList.toggle('invisible');
-      }
-    </script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        let carousel = document.querySelector('.carousel');
-        let items = carousel.querySelectorAll('.item');
-        let dotsContainer = document.querySelector('.dots');
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+		<link rel="stylesheet" href="./style.css" />
+		<title>Kerti Pincék - Bemutatkozás</title>
+		<script src="bemutatkozas.js"></script>
+		<script src="time.js"></script>
+		<script
+			type="text/javascript"
+			src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"
+		></script>
+		<script
+			type="text/javascript"
+			src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"
+		></script>
+		<script
+			type="text/javascript"
+			src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
+		></script>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"
+		/>
+	</head>
+	<body
+		class="bg-linear-to-r from-green-200 from-30% via-purple-200 via-60% to-amber-200"
+	>
+		<div
+			class="sticky top-0 z-100 h-auto rounded-b-md bg-gray-500 py-4 text-center text-4xl"
+		>
+			<div class="grid grid-cols-5 justify-center">
+				<div class="col-span-1"></div>
+				<div class="col-span-3">
+					<span
+						class="mx-5 rounded-xl border border-gray-400 bg-gray-400 px-3 hover:text-gray-300"
+						><a href="./index.html">Othhon</a></span
+					>
+					<span
+						class="mx-5 rounded-xl border border-gray-400 bg-gray-400 px-3 hover:text-gray-300"
+						><a href="./bemutatkozas.html">Bemutatkozás</a></span
+					>
+					<span
+						class="mx-5 rounded-xl border border-gray-400 bg-gray-400 px-3 hover:text-gray-300"
+						><a href="./tankolas.html">Tankolás</a></span
+					>
+				</div>
+				<div class="col-span-1">
+					<span id="time" class="float-right mr-8 text-slate-100"
+						>00:00:00</span
+					>
+				</div>
+			</div>
+		</div>
 
-        // Insert dots into the DOM
-        items.forEach((_, index) => {
-          let dot = document.createElement('span');
-          dot.classList.add('dot');
-          if (index === 0) dot.classList.add('active');
-          dot.dataset.index = index;
-          dotsContainer.appendChild(dot);
-        });
+		<div>
+			<div class="grid grid-cols-5 py-10 text-center text-9xl font-bold">
+				<div class="col-span-1">
+					<span></span>
+				</div>
+				<div class="col-span-3">
+					<span class="text-shadow-lg">Kerti Pincék</span>
+				</div>
+				<div class="col-span-1">
+					<img
+						src="./assets/csany_logo.png"
+						alt=""
+						class="col-span-1 float-right mx-5"
+					/>
+				</div>
+			</div>
+			<div class="grid grid-cols-3 text-2xl">
+				<div class="col-span-1 m-auto">
+					<button
+						type="button"
+						onclick="toggle_hidden('Beni')"
+						class="inline-flex w-auto items-center rounded border-b-2 border-purple-500 bg-white px-6 py-2 font-bold tracking-wide text-gray-800 shadow-md hover:border-purple-600 hover:bg-purple-500 hover:text-white"
+					>
+						Kele Benjamin
+					</button>
+				</div>
+				<div class="col-span-1 m-auto">
+					<button
+						type="button"
+						onclick="toggle_hidden('Vince')"
+						class="inline-flex w-auto items-center rounded border-b-2 border-blue-500 bg-white px-6 py-2 font-bold tracking-wide text-gray-800 shadow-md hover:border-blue-600 hover:bg-blue-500 hover:text-white"
+					>
+						Kerti Vince
+					</button>
+				</div>
+				<div class="col-span-1 m-auto">
+					<button
+						type="button"
+						onclick="toggle_hidden('Marci')"
+						class="inline-flex w-auto items-center rounded border-b-2 border-green-500 bg-white px-6 py-2 font-bold tracking-wide text-gray-800 shadow-md hover:border-green-600 hover:bg-green-500 hover:text-white"
+					>
+						Kámán Marcell
+					</button>
+				</div>
+			</div>
+			<div class="grid grid-cols-3">
+				<div class="top-0 col-span-1">
+					<p
+						id="Beni"
+						class="m-8 mt-3 hidden rounded-xl border-2 border-black bg-purple-500/80 p-3 text-2xl text-white"
+					>
+						Szeretem a programozást, és szeretném úgy gondolni, hogy
+						jó is vagyok bennne!
+						<img
+							src="./assets/DSC07095.png"
+							alt=""
+							class="mt-5 rounded-xl"
+						/>
+					</p>
+				</div>
+				<div class="top-0 col-span-1">
+					<p
+						id="Vince"
+						class="m-8 mt-3 hidden rounded-xl border-2 border-black bg-blue-600/80 p-3 text-2xl text-white"
+					>
+						Persze, itt van egy rövid bemutató magadról a megadottak
+						alapján... Szóval már általános iskola óta érdekelt a
+						szoftverfejlesztés. (Sajnos a webfejlesztéssel ki lehet
+						kergetni a világból)
+						<img
+							src="./assets/en.png"
+							alt=""
+							class="mt-5 rounded-xl"
+						/>
+					</p>
+				</div>
+				<div class="top-0 col-span-1">
+					<p
+						id="Marci"
+						class="m-8 mt-3 hidden rounded-xl border-2 border-black bg-green-600/80 p-3 text-2xl text-white"
+					>
+						Programozó, vagy akár játékfejlesztő szeretnék majd
+						lenni... Annyira, hogy már készítettem is egy játékot
+						ami kint van itch.io-n:
+						<a
+							target="_blank"
+							class="underline hover:text-black"
+							href="https://m125.itch.io/duck"
+							>m125.itch.io/duck</a
+						>
+						<img
+							src="./assets/miert_kell_lefotoznom_magam.jpg"
+							alt=""
+							class="mt-5 rounded-xl"
+						/>
+					</p>
+				</div>
+			</div>
+			<div class="my-5 text-center text-4xl">
+				<span>Felkészítő tanárunk: Bende Attila</span>
+				<img
+					src="./assets/Bende_Attila.jpeg"
+					alt=""
+					class="m-auto my-3 rounded-xl"
+				/>
+			</div>
+			<div class="my-5 text-center text-4xl">
+				Iskolánk neve: ZSZC Csány László Technikum
+			</div>
+			<div class="flex justify-center">
+				<button
+					onclick="
+						toggle_hidden('carouselInit');
+						toggle_invisible('carousel');
+					"
+					id="carouselInit"
+					class="m-5 text-3xl"
+				>
+					<span
+						class="inline-flex items-center rounded border-b-2 border-yellow-500 bg-white px-6 py-2 font-bold tracking-wide text-gray-800 shadow-md hover:border-yellow-600 hover:bg-yellow-500 hover:text-white"
+						>Katt rám!</span
+					>
+				</button>
+			</div>
+			<div
+				id="carousel"
+				class="carousel-container invisible w-1/2 pb-80 text-white"
+			>
+				<button class="next m-5 text-3xl">
+					<span
+						class="inline-flex items-center rounded border-b-2 border-yellow-500 bg-white px-6 py-2 font-bold tracking-wide text-gray-800 shadow-md hover:border-yellow-600 hover:bg-yellow-500 hover:text-white"
+						>Katt rám!</span
+					>
+				</button>
+				<button class="prev hidden">Next</button>
+				<div class="carousel aspect-auto">
+					<div class="item active">
+						<img src="./assets/DSC00466.JPG" alt="Image 1" />
+					</div>
+					<div class="item">
+						<img src="./assets/DSC00490.JPG" alt="Image 2" />
+					</div>
+					<div class="item">
+						<img src="./assets/DSC01597.png" alt="Image 3" />
+					</div>
+					<div class="item">
+						<img src="./assets/DSC02488.JPG" alt="Image 4" />
+					</div>
+				</div>
 
-        let dots = document.querySelectorAll('.dot');
-
-        // Function to show a specific item
-        function showItem(index) {
-          items.forEach((item, idx) => {
-            item.classList.remove('active');
-            dots[idx].classList.remove('active');
-            if (idx === index) {
-              item.classList.add('active');
-              dots[idx].classList.add('active');
-            }
-          });
-        }
-
-        // Event listeners for buttons
-        document.querySelector('.prev').addEventListener('click', () => {
-          let index = [...items].findIndex((item) =>
-            item.classList.contains('active'),
-          );
-          showItem((index - 1 + items.length) % items.length);
-        });
-
-        document.querySelector('.next').addEventListener('click', () => {
-          let index = [...items].findIndex((item) =>
-            item.classList.contains('active'),
-          );
-          showItem((index + 1) % items.length);
-        });
-
-        // Event listeners for dots
-        dots.forEach((dot) => {
-          dot.addEventListener('click', () => {
-            let index = parseInt(dot.dataset.index);
-            showItem(index);
-          });
-        });
-      });
-    </script>
-  </head>
-  <body class="bg-green-200">
-    <div
-      class="sticky top-0 h-auto rounded-b-md bg-gray-500 py-4 text-center text-4xl"
-    >
-      <div class="justify-center grid grid-cols-5">
-        <div class="col-span-1"></div>
-        <div class="col-span-3">
-          <span
-            class="mx-5 rounded-xl border border-gray-400 bg-gray-400 hover:text-gray-300"
-          >
-            <a href="./index.html">Othhon</a>
-          </span>
-          <span
-            class="mx-5 rounded-xl border border-gray-400 bg-gray-400 hover:text-gray-300"
-          >
-            <a href="./bemutatkozas.html">Bemutatkozás</a>
-          </span>
-          <span
-            class="mx-5 rounded-xl border border-gray-400 bg-gray-400 hover:text-gray-300"
-          >
-            <a href="./tankolas.html">Tankolás</a>
-          </span>
-        </div>
-        <div class="col-span-1">
-          <span id="time" class="float-right mr-8 text-gray-700">00:00:00</span>
-        </div>
-      </div>
-    </div>
-    <script>
-      let hour = 0;
-      let minute = 0;
-      let second = 0;
-      function set_time() {
-        const time = new Date();
-        hour = time.getHours();
-        minute = time.getMinutes();
-        second = time.getSeconds();
-      }
-      function padNumber(n) {
-        const str = '0' + n;
-        return str.slice(-2);
-      }
-      function displayTime() {
-        const display = document.getElementById('time');
-        display.innerHTML =
-          padNumber(hour) + ':' + padNumber(minute) + ':' + padNumber(second);
-      }
-      function timeloop() {
-        displayTime();
-        set_time();
-        setTimeout(timeloop, 1000);
-      }
-      addEventListener('focus', timeloop());
-    </script>
-    <div>
-      <div class="text-center text-9xl py-10 font-bold grid grid-cols-5">
-        <div class="col-span-1">
-          <span></span>
-        </div>
-        <div class="col-span-3">
-          <span class="text-shadow-lg">Kerti Pincék</span>
-        </div>
-        <div class="col-span-1">
-          <img
-            src="./assets/csany_logo.png"
-            alt=""
-            class="float-right mx-5 col-span-1"
-          />
-        </div>
-      </div>
-      <div class="grid grid-cols-3 text-2xl">
-        <div class="col-span-1 m-auto">
-          <button
-            type="button"
-            onclick="toggle_hidden('Beni')"
-            class="w-auto bg-white tracking-wide text-gray-800 font-bold rounded border-b-2 border-purple-500 hover:border-purple-600 hover:bg-purple-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"
-          >
-            Kele Benjamin
-          </button>
-        </div>
-        <div class="col-span-1 m-auto">
-          <button
-            type="button"
-            onclick="toggle_hidden('Vince')"
-            class="w-auto bg-white tracking-wide text-gray-800 font-bold rounded border-b-2 border-blue-500 hover:border-blue-600 hover:bg-blue-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"
-          >
-            Kerti Vince
-          </button>
-        </div>
-        <div class="col-span-1 m-auto">
-          <button
-            type="button"
-            onclick="toggle_hidden('Marci')"
-            class="w-auto bg-white tracking-wide text-gray-800 font-bold rounded border-b-2 border-green-500 hover:border-green-600 hover:bg-green-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"
-          >
-            Kámán Marcell
-          </button>
-        </div>
-      </div>
-      <div class="grid grid-cols-3">
-        <div class="col-span-1 m-auto">
-          <p
-            id="Beni"
-            class="hidden border-2 border-black text-white bg-purple-500/80 rounded-xl text-2xl mt-3 m-8 p-3"
-          >
-            Szeretem a programozást, és szeretném úgy gondolni, hogy jó is
-            vagyok bennne!
-            <img src="./assets/DSC07095.png" alt="" class="rounded-xl mt-5" />
-          </p>
-        </div>
-        <div class="col-span-1 m-auto">
-          <p
-            id="Vince"
-            class="hidden border-2 border-gray-200 bg-white/80 rounded-xl text-2xl mt-3 p-3"
-          >
-            bemutatk helye
-          </p>
-        </div>
-        <div class="col-span-1 m-auto">
-          <p
-            id="Marci"
-            class="hidden border-2 border-gray-200 bg-white/80 rounded-xl text-2xl mt-3 p-3"
-          >
-            bemutatk helye
-          </p>
-        </div>
-      </div>
-      <div class="text-center text-4xl my-5">
-        <span>Felkészítő tanárunk: Bende Attila</span>
-        <img
-          src="./assets/Bende_Attila.jpeg"
-          alt=""
-          class="m-auto my-3 rounded-xl"
-        />
-      </div>
-      <div class="text-center text-4xl my-5">
-        Iskolánk neve: ZSZC Csány László Technikum
-      </div>
-      <div class="flex justify-center">
-        <button
-          onclick="
-            toggle_hidden('carouselInit');
-            toggle_invisible('carousel');
-          "
-          id="carouselInit"
-          class="m-5 text-3xl"
-        >
-          <span
-            class="bg-white tracking-wide text-gray-800 font-bold rounded border-b-2 border-yellow-500 hover:border-yellow-600 hover:bg-yellow-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"
-            >Katt rám!</span
-          >
-        </button>
-      </div>
-      <div
-        id="carousel"
-        class="carousel-container text-white pb-80 w-1/2 invisible"
-      >
-        <button class="next m-5 text-3xl">
-          <span
-            class="bg-white tracking-wide text-gray-800 font-bold rounded border-b-2 border-yellow-500 hover:border-yellow-600 hover:bg-yellow-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"
-            >Katt rám!</span
-          >
-        </button>
-        <button class="prev hidden">Next</button>
-        <div class="carousel aspect-auto">
-          <div class="item active">
-            <img src="./assets/DSC00466.JPG" alt="Image 1" />
-          </div>
-          <div class="item">
-            <img src="./assets/DSC00490.JPG" alt="Image 2" />
-          </div>
-          <div class="item">
-            <img src="./assets/DSC01597.png" alt="Image 3" />
-          </div>
-          <div class="item">
-            <img src="./assets/DSC02488.JPG" alt="Image 4" />
-          </div>
-        </div>
-
-        <div class="dots hidden"></div>
-      </div>
-    </div>
-  </body>
+				<div class="dots hidden"></div>
+			</div>
+		</div>
+	</body>
 </html>
