@@ -106,6 +106,8 @@ function list_by_time() {
 		for (month in data[year]) {
 			let sum = 0;
 			const table = document.createElement("table");
+			const body = document.createElement("tbody");
+			table.appendChild(body);
 			table_classes.split(" ").forEach((e) => table.classList.add(e));
 
 			data[year][month].forEach((item) => {
@@ -123,7 +125,7 @@ function list_by_time() {
 				}
 				last_distance = parseInt(item["km"]);
 
-				table.innerHTML += `<tr class=${tr_classes}>
+				body.innerHTML += `<tr class="${tr_classes}">
                             <td class="w-1/4 text-center">${item["date"]}</td>
                             <td class="w-1/4 text-center">${item["amount"]} L</td>
                             <td class="w-1/4 text-center">${item["cost"]} Ft</td>
