@@ -61,31 +61,31 @@
 						type="date"
 						id="tankolasDate"
 						name="tankolasDate"
-							class="bg-gray-500 rounded-lg"
+							class="bg-gray-200 m-1 p-1 border rounded-lg"
 							/>
 						<label for="tankolasAmount">Mennyiség (liter):</label>
 						<input
 						type="float"
 						id="tankolasAmount"
 						name="tankolasAmount"
-						class="bg-gray-500 rounded-lg w-1/20 min-w-10"
+						class="bg-gray-200 m-1 p-1 border rounded-lg w-1/20 min-w-10"
 						/>
 						<label for="tankloasOsszeg">Fizetett összeg</label>
 						<input
 						type="int"
 						id="tankolasCost"
 						name="tankolasCost"
-						class="bg-gray-500 rounded-lg w-1/20 min-w-10"
+						class="bg-gray-200 border m-1 p-1 rounded-lg w-1/20 min-w-10"
 						/>
 						<label for="tankloasOsszeg">Km óra állása</label>
 						<input
 						type="int"
 						id="tankolasDistance"
 						name="tankolasDistance"
-						class="bg-gray-500 rounded-lg w-1/20 min-w-10"
+						class="bg-gray-200 m-1 p-1 border rounded-lg w-1/20 min-w-10"
 						/>
 						<br/>
-						<button class="bg-gray-400 rounded-lg p-1 m-1 border" type="submit" id="tankolasSubmit">Bevitel</button>
+						<button class="bg-green-400 hover:bg-green-300  rounded-lg p-1 m-1 border" type="submit" id="tankolasSubmit">Bevitel</button>
 					</form>
 				</div>
 			</div>
@@ -93,8 +93,8 @@
 		<div class="text-center">
 
 			<input type="text" name="datefilter" value="" id="tankolasRange" class="bg-gray-200 rounded-lg p-1 m-1 border"/>
-			<button onclick="listing(0)" class="bg-gray-400 rounded-lg p-1 m-1 border">listázás idő szerint</button>
-			<button onclick="listing(1)" class="bg-gray-400 rounded-lg p-1 m-1 border">listázás hatékonyság szerint</button>
+			<button onclick="listing(0)" class="bg-gray-400 hover:bg-gray-300 rounded-lg p-1 m-1 border">Listázás idő szerint</button>
+			<button onclick="listing(1)" class="bg-gray-400 hover:bg-gray-300 rounded-lg p-1 m-1 border">Listázás hatékonyság szerint</button>
 		</div>
 		<div id="tankolasList" class="m-auto text-center">
 			<table class="m-auto bg-gray-600 w-1/2 rounded-lg padding">
@@ -115,39 +115,7 @@
 			function tankolasCalc() {
 				console.log(document.getElementById('tankolasSubmit').value);
 			}
-			document
-				.getElementById('tankolasForm')
-				.addEventListener('submit', function (event) {
-					event.preventDefault();
-					const formData = new FormData(event.target);
-					console.log(formData);
-					const date = formData.get('tankolasDate');// Miért username?????????
-					const amount = formData.get('tankolasAmount');
-					const cost = formData.get('tankolasCost');
-					const distance = formData.get('tankolasDistance');//nemtom miaz hogy km óra állás angolul úgyhogy lesz helyette distance
-					console.log('Submitted DATA NOT USERNAME!!! HOW DID U COME UP WITH USERNAME HERE:', date,amount,cost);
-					storeData(date,amount,cost,distance);
-				});
-			$(function() {
-
-  $('input[name="datefilter"]').daterangepicker({
-      autoUpdateInput: false,
-      locale: {
-          cancelLabel: 'Clear'
-      }
-  });
-
-  $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
-      $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
-      listing()
-  });
-
-  $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
-      $(this).val('');
-      listing();
-  });
-
-			});
+			setup()
 
 			listing()
 		</script>
