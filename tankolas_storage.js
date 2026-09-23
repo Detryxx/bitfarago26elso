@@ -146,7 +146,7 @@ function list_by_time() {
 			});
 
 			const text = document.createElement("p");
-			text.innerHTML = `${year}/${month} - ${sum} Ft`;
+			text.innerHTML = `${year}/${padNumber(month)} - ${sum} Ft`;
 			text_classes.split(" ").forEach((e) => text.classList.add(e));
 
 			list.appendChild(text);
@@ -213,7 +213,7 @@ function list_by_efficiency() {
                             <td class="w-1/5 text-center">${item["date"]}</td>
                             <td class="w-1/5 text-center">${item["amount"]} L</td>
                             <td class="w-1/5 text-center">${item["cost"]} Ft</td>
-                            <td class="w-1/5 text-center">${item["km"]}(${item["diff"]}) km</td>
+                            <td class="w-1/5 text-center">${item["km"]} km</td>
                             <td class="w-1/5 text-center">${
 															Math.round(
 																(parseInt(item["amount"]) /
