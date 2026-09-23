@@ -40,7 +40,7 @@ function getData() {
 			}
 			return 0;
 		});
-	} //MAJDNEM RAGEQUITELTEM A MANÓBA A JAVASCRIPT FOLYTON ÚGY DÖNTÖTT HOGY CSAK ÚGY IGNORÁLJA A SORTOLÁST
+	} // MAJDNEM RAGEQUITELTEM A MANÓBA A JAVASCRIPT FOLYTON ÚGY DÖNTÖTT HOGY CSAK ÚGY IGNORÁLJA A SORTOLÁST
 	// console.log("getdata sorted",res)
 	return res ? res : [];
 }
