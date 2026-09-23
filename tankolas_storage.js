@@ -104,7 +104,7 @@ function list_by_time() {
 		for (month in data[year]) {
 			let sum = 0;
 			const table = document.createElement("table");
-			"m-auto bg-gray-400 w-3/4 rounded-lg padding"
+			"m-auto bg-gray-600 w-1/2 rounded-lg padding text-sm text-left rtl:text-right text-body"
 				.split(" ")
 				.forEach((e) => table.classList.add(e));
 			
