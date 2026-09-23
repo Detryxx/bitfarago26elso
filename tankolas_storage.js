@@ -1,5 +1,6 @@
 let listEfficiency = false;
 const table_classes = "";
+const tr_classes = "";
 function storeData(date, amount, cost, km) {
 	let record = {
 		date: date,
@@ -105,9 +106,7 @@ function list_by_time() {
 		for (month in data[year]) {
 			let sum = 0;
 			const table = document.createElement("table");
-			"m-auto bg-gray-400 w-3/4 rounded-lg padding"
-				.split(" ")
-				.forEach((e) => table.classList.add(e));
+			table_classes.split(" ").forEach((e) => table.classList.add(e));
 
 			data[year][month].forEach((item) => {
 				let difference_text = "";
@@ -124,7 +123,7 @@ function list_by_time() {
 				}
 				last_distance = parseInt(item["km"]);
 
-				table.innerHTML += `<tr>
+				table.innerHTML += `<tr ${tr_classes}>
                             <td class="w-1/4 text-center">${item["date"]}</td>
                             <td class="w-1/4 text-center">${item["amount"]} L</td>
                             <td class="w-1/4 text-center">${item["cost"]} Ft</td>
@@ -191,15 +190,13 @@ function list_by_efficiency() {
 	const table = document.createElement("table");
 	const body = document.createElement("tbody");
 	table.appendChild(body);
-	"m-auto bg-gray-400 w-3/4 rounded-lg padding"
-		.split(" ")
-		.forEach((e) => table.classList.add(e));
+	table_classes.split(" ").forEach((e) => table.classList.add(e));
 	console.log(sorted);
 	sorted.forEach((item) => {
 		if (parseInt(item["amount"]) / parseInt(item["diff"]) != Infinity) {
 			let clear_button_item = { ...item }; //ez elvileg copy
 			delete clear_button_item["diff"];
-			body.innerHTML += `<tr>
+			body.innerHTML += `<tr ${tr_classes}>
 
                             <td class="w-1/5 text-center">${item["date"]}</td>
                             <td class="w-1/5 text-center">${item["amount"]} L</td>
