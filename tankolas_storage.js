@@ -1,4 +1,5 @@
 let listEfficiency = false;
+<<<<<<< HEAD
 const table_classes =
 	"m-auto bg-gray-600 w-1/2 border-2 border-black rounded-lg padding text-sm text-left rtl:text-right text-body overflow-hidden text-zinc-100";
 const tr_classes =
@@ -8,6 +9,10 @@ const text_classes =
 const delete_classes =
 	"text-white bg-red-600 hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5 cursor-pointer";
 
+=======
+const table_classes = "m-auto bg-gray-600 w-1/2 rounded-lg padding text-sm text-left rtl:text-right text-body";
+const tr_classes = "odd:bg-neutral-primary even:bg-neutral-secondary-soft border-b border-default";
+>>>>>>> 12ba46bde259cb87f4ef19917a0932044d3ce24e
 function storeData(date, amount, cost, km) {
 	let record = {
 		date: date,
@@ -114,6 +119,11 @@ function list_by_time() {
 		for (month in data[year]) {
 			let sum = 0;
 			const table = document.createElement("table");
+<<<<<<< HEAD
+=======
+			const body = document.createElement("tbody");
+			table.appendChild(body);
+>>>>>>> 12ba46bde259cb87f4ef19917a0932044d3ce24e
 			table_classes.split(" ").forEach((e) => table.classList.add(e));
 
 			data[year][month].forEach((item) => {
@@ -131,7 +141,7 @@ function list_by_time() {
 				}
 				last_distance = parseInt(item["km"]);
 
-				table.innerHTML += `<tr ${tr_classes}>
+				body.innerHTML += `<tr class="${tr_classes}">
                             <td class="w-1/4 text-center">${item["date"]}</td>
                             <td class="w-1/4 text-center">${item["amount"]} L</td>
                             <td class="w-1/4 text-center">${item["cost"]} Ft</td>
