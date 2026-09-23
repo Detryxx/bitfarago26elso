@@ -1,11 +1,6 @@
 let listEfficiency = false;
-<<<<<<< HEAD
-const table_classes = "";
-const tr_classes = "";
-=======
 const table_classes = "m-auto bg-gray-600 w-1/2 rounded-lg padding text-sm text-left rtl:text-right text-body";
 const tr_classes = "odd:bg-neutral-primary even:bg-neutral-secondary-soft border-b border-default";
->>>>>>> 31f5fc1c73b17c6dafb4495191e388975a70eb66
 function storeData(date, amount, cost, km) {
 	let record = {
 		date: date,
@@ -111,13 +106,7 @@ function list_by_time() {
 		for (month in data[year]) {
 			let sum = 0;
 			const table = document.createElement("table");
-<<<<<<< HEAD
 			table_classes.split(" ").forEach((e) => table.classList.add(e));
-=======
-			"m-auto bg-gray-600 w-1/2 rounded-lg padding text-sm text-left rtl:text-right text-body"
-				.split(" ")
-				.forEach((e) => table.classList.add(e));
->>>>>>> 31f5fc1c73b17c6dafb4495191e388975a70eb66
 
 			data[year][month].forEach((item) => {
 				let difference_text = "";
@@ -134,7 +123,7 @@ function list_by_time() {
 				}
 				last_distance = parseInt(item["km"]);
 
-				table.innerHTML += `<tr ${tr_classes}>
+				table.innerHTML += `<tr class=${tr_classes}>
                             <td class="w-1/4 text-center">${item["date"]}</td>
                             <td class="w-1/4 text-center">${item["amount"]} L</td>
                             <td class="w-1/4 text-center">${item["cost"]} Ft</td>
