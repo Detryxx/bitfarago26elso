@@ -1,9 +1,9 @@
 let listEfficiency = false;
 const table_classes =
-	"m-auto bg-gray-600 w-1/2 border-2 border-black rounded-lg padding text-sm text-left rtl:text-right text-body overflow-hidden text-zinc-100";
+	"m-auto bg-gray-600 w-1/2 outline-2 outline-black rounded-lg padding text-sm text-left rtl:text-right text-body overflow-hidden text-zinc-100";
 const tr_classes = "odd:bg-neutral-primary even:bg-neutral-secondary-soft";
 const text_classes =
-	"rounded-t-lg bg-gray-600 max-w-fit mx-auto mt-3 p-1 text-white font-bold border-x-2 border-t-2 border-black relative top-0.5";
+	"rounded-t-lg bg-gray-600 max-w-fit mx-auto mt-3 p-1 text-white font-bold border-x-2 border-t-2 border-black relative";
 const delete_classes =
 	"text-white bg-red-600 hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5 cursor-pointer";
 
