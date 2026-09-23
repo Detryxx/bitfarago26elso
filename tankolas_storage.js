@@ -1,11 +1,13 @@
 let listEfficiency = false;
-<<<<<<< HEAD
-const table_classes = "";
-const tr_classes = "";
-=======
-const table_classes = "m-auto bg-gray-600 w-1/2 rounded-lg padding text-sm text-left rtl:text-right text-body";
-const tr_classes = "odd:bg-neutral-primary even:bg-neutral-secondary-soft border-b border-default";
->>>>>>> 31f5fc1c73b17c6dafb4495191e388975a70eb66
+const table_classes =
+	"m-auto bg-gray-600 w-1/2 border-2 border-black rounded-lg padding text-sm text-left rtl:text-right text-body overflow-hidden text-zinc-100";
+const tr_classes =
+	"odd:bg-neutral-primary even:bg-neutral-secondary-soft border-b border-default";
+const text_classes =
+	"rounded-t-lg bg-gray-600 max-w-fit mx-auto mt-3 p-1 text-white font-bold border-x-2 border-t-2 border-black relative top-0.5";
+const delete_classes =
+	"text-white bg-red-600 hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5 cursor-pointer";
+
 function storeData(date, amount, cost, km) {
 	let record = {
 		date: date,
@@ -39,7 +41,7 @@ function getData() {
 			}
 			return 0;
 		});
-	} //MAJDNEM RAGEQUITELTEM BAZMGE A JAVASCRIPT FOLYTON ÚGY DÖNTÖTT HOGY CSAK ÚGY IGNORÁLJA A SORTOLÁST
+	} //MAJDNEM RAGEQUITELTEM A MANÓBA A JAVASCRIPT FOLYTON ÚGY DÖNTÖTT HOGY CSAK ÚGY IGNORÁLJA A SORTOLÁST
 	// console.log("getdata sorted",res)
 	return res ? res : [];
 }
@@ -105,19 +107,14 @@ function list_by_time() {
 	let first_item = true;
 
 	for (year in data) {
-		const ytext = document.createElement("p");
-		ytext.innerHTML = `${year}`;
-		list.appendChild(ytext);
+		// const ytext = document.createElement("p");
+		// ytext.innerHTML = `${year}`;
+		// ytext_classes.split(" ").forEach((e) => ytext.classList.add(e));
+		// list.appendChild(ytext);
 		for (month in data[year]) {
 			let sum = 0;
 			const table = document.createElement("table");
-<<<<<<< HEAD
 			table_classes.split(" ").forEach((e) => table.classList.add(e));
-=======
-			"m-auto bg-gray-600 w-1/2 rounded-lg padding text-sm text-left rtl:text-right text-body"
-				.split(" ")
-				.forEach((e) => table.classList.add(e));
->>>>>>> 31f5fc1c73b17c6dafb4495191e388975a70eb66
 
 			data[year][month].forEach((item) => {
 				let difference_text = "";
@@ -139,14 +136,15 @@ function list_by_time() {
                             <td class="w-1/4 text-center">${item["amount"]} L</td>
                             <td class="w-1/4 text-center">${item["cost"]} Ft</td>
                             <td class="w-1/4 text-center">${item["km"]}${difference_text} km</td>
-                            <td><button type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5 cursor-pointer" onclick='erase_entry(${JSON.stringify(item)})'><span class="material-symbols-outlined">delete</span></button></td>
+                            <td><button type="button" class="${delete_classes}" onclick='erase_entry(${JSON.stringify(item)})'><span class="material-symbols-outlined">delete</span></button></td>
                         </tr>`;
 
 				sum += parseInt(item["cost"]);
 			});
 
 			const text = document.createElement("p");
-			text.innerHTML = `${month} - ${sum} Ft`;
+			text.innerHTML = `${year}/${month} - ${sum} Ft`;
+			text_classes.split(" ").forEach((e) => text.classList.add(e));
 
 			list.appendChild(text);
 			list.appendChild(table);
@@ -207,7 +205,7 @@ function list_by_efficiency() {
 		if (parseInt(item["amount"]) / parseInt(item["diff"]) != Infinity) {
 			let clear_button_item = { ...item }; //ez elvileg copy
 			delete clear_button_item["diff"];
-			body.innerHTML += `<tr ${tr_classes}>
+			body.innerHTML += `<tr class="${tr_classes}">
 
                             <td class="w-1/5 text-center">${item["date"]}</td>
                             <td class="w-1/5 text-center">${item["amount"]} L</td>
@@ -220,7 +218,7 @@ function list_by_efficiency() {
 																	1000,
 															) / 1000
 														}L/km</td>
-                            <td><button type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5 cursor-pointer" onclick='erase_entry(${JSON.stringify(item)})'><span class="material-symbols-outlined">delete</span></button></td>
+                            <td><button type="button" class="${delete_classes}" onclick='erase_entry(${JSON.stringify(item)})'><span class="material-symbols-outlined">delete</span></button></td>
                         </tr>`;
 		}
 	});
