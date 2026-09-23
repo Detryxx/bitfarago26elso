@@ -61,8 +61,8 @@
 		</div>
 
 		<div>
-			<div class="m-auto text-center">
-				<span class="mx-5 text-7xl">Tankolás Bevitel</span>
+			<div class="m-auto text-center text-lg">
+				<h1 class="text-7xl my-5 font-bold">Tankolás Bevitel</h1>
 				<div>
 					<form id="tankolasForm">
 						<label for="tankolasDate">Dátum:</label>
@@ -70,32 +70,32 @@
 							type="date"
 							id="tankolasDate"
 							name="tankolasDate"
-							class="m-1 rounded-lg border bg-gray-200 p-1"
+							class="m-1 rounded-lg border bg-gray-300 hover:bg-gray-200 p-1 mr-5"
 						/>
 						<label for="tankolasAmount">Mennyiség (liter):</label>
 						<input
 							type="float"
 							id="tankolasAmount"
 							name="tankolasAmount"
-							class="m-1 w-1/20 min-w-10 rounded-lg border bg-gray-200 p-1"
+							class="m-1 w-1/20 min-w-10 rounded-lg border bg-gray-300 hover:bg-gray-200 p-1 mr-5"
 						/>
-						<label for="tankloasOsszeg">Fizetett összeg</label>
+						<label for="tankloasOsszeg">Fizetett összeg:</label>
 						<input
 							type="int"
 							id="tankolasCost"
 							name="tankolasCost"
-							class="m-1 w-1/20 min-w-10 rounded-lg border bg-gray-200 p-1"
+							class="m-1 w-1/20 min-w-10 rounded-lg border bg-gray-300 hover:bg-gray-200 p-1 mr-5"
 						/>
-						<label for="tankloasOsszeg">Km óra állása</label>
+						<label for="tankloasOsszeg">Km óra állása:</label>
 						<input
 							type="int"
 							id="tankolasDistance"
 							name="tankolasDistance"
-							class="m-1 w-1/20 min-w-10 rounded-lg border bg-gray-200 p-1"
+							class="m-1 w-1/20 min-w-10 rounded-lg border bg-gray-300 hover:bg-gray-200 p-1"
 						/>
 						<br />
 						<button
-							class="m-1 rounded-lg border bg-green-400 p-1 hover:bg-green-300"
+							class="m-1 rounded-lg border bg-green-400 p-1 hover:bg-green-300 text-2xl"
 							type="submit"
 							id="tankolasSubmit"
 						>
@@ -109,9 +109,9 @@
 			<input
 				type="text"
 				name="datefilter"
-				value=""
+				value="Válasszon időtartamot"
 				id="tankolasRange"
-				class="m-1 rounded-lg border bg-gray-200 p-1"
+				class="m-1 rounded-lg border bg-gray-300 hover:bg-gray-200 p-1"
 			/>
 			<button
 				onclick="listing(0)"

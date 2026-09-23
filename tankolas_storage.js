@@ -1,6 +1,6 @@
 let listEfficiency = false;
 const table_classes =
-	"m-auto bg-gray-600 w-1/2 outline-2 outline-black rounded-lg padding text-sm text-left rtl:text-right text-body overflow-hidden text-zinc-100";
+	"m-auto bg-gray-600 w-1/2 ring-2 ring-black rounded-lg padding text-sm text-left rtl:text-right text-body overflow-hidden text-zinc-100";
 const tr_classes = "odd:bg-neutral-primary even:bg-neutral-secondary-soft";
 const text_classes =
 	"rounded-t-lg bg-gray-600 max-w-fit mx-auto mt-3 p-1 text-white font-bold border-x-2 border-t-2 border-black relative";
@@ -64,10 +64,11 @@ function list_by_time() {
 	const datestart = document
 		.getElementById("tankolasRange")
 		.value.split(" - ")[0];
+	
 	const dateend = document
 		.getElementById("tankolasRange")
 		.value.split(" - ")[1];
-
+	
 	// console.log("dates",datestart, dateend);
 
 	// console.log(data);
@@ -99,11 +100,14 @@ function list_by_time() {
 
 	// console.log(data);
 	list.innerHTML = "";
-
+	// console.log(data)
 	data = listByMonths(data);
+	// console.log(data)
 
 	let last_distance = 0;
 	let first_item = true;
+
+	
 
 	for (year in data) {
 		// const ytext = document.createElement("p");
@@ -117,6 +121,8 @@ function list_by_time() {
 			table.appendChild(body);
 			table_classes.split(" ").forEach((e) => table.classList.add(e));
 
+			
+
 			data[year][month].forEach((item) => {
 				let difference_text = "";
 				if (first_item) {
@@ -125,9 +131,9 @@ function list_by_time() {
 					const diff = parseInt(item["km"]) - last_distance;
 
 					if (diff > 0) {
-						difference_text = `(+${diff})`;
+						difference_text = ` (+${diff})`;
 					} else if (diff < 0) {
-						difference_text = `(${diff}, nem kéne megbűvölni a km órát)`;
+						difference_text = ` (${diff}, nem kéne megbűvölni a km órát)`;
 					}
 				}
 				last_distance = parseInt(item["km"]);
@@ -201,7 +207,7 @@ function list_by_efficiency() {
 	const body = document.createElement("tbody");
 	table.appendChild(body);
 	table_classes.split(" ").forEach((e) => table.classList.add(e));
-	console.log(sorted);
+	// console.log(sorted);
 	sorted.forEach((item) => {
 		if (parseInt(item["amount"]) / parseInt(item["diff"]) != Infinity) {
 			let clear_button_item = { ...item }; //ez elvileg copy
@@ -230,10 +236,10 @@ function erase_entry(delItem) {
 	let data = getData();
 	for (n in data) {
 		const item = data[n];
-		console.log("erase", delItem, item);
+		// console.log("erase", delItem, item);
 		if (JSON.stringify(item) == JSON.stringify(delItem)) {
 			data.splice(n, 1);
-			console.log(delItem, data, n);
+			// console.log(delItem, data, n);
 			break;
 		}
 	}
@@ -267,10 +273,12 @@ function listByMonths(data) {
 			),
 		);
 	});
-
+	
+	
 	for (let key in result) {
 		let months = {};
 		for (let record in result[key]) {
+			
 			if (
 				!Object.keys(months).includes(result[key][record]["date"].split("-")[1])
 			) {
@@ -287,7 +295,7 @@ function listByMonths(data) {
 		result[key] = months;
 	}
 
-	console.log(result);
+	// console.log(result);
 	return result;
 }
 
@@ -297,17 +305,17 @@ function setup() {
 		.addEventListener("submit", function (event) {
 			event.preventDefault();
 			const formData = new FormData(event.target);
-			console.log(formData);
+			// console.log(formData);
 			const date = formData.get("tankolasDate"); // Miért username?????????
 			const amount = formData.get("tankolasAmount");
 			const cost = formData.get("tankolasCost");
 			const distance = formData.get("tankolasDistance"); //nemtom miaz hogy km óra állás angolul úgyhogy lesz helyette distance
-			console.log(
-				"Submitted DATA NOT USERNAME!!! HOW DID U COME UP WITH USERNAME HERE:",
-				date,
-				amount,
-				cost,
-			);
+			// console.log(
+			// 	"Submitted DATA NOT USERNAME!!! HOW DID U COME UP WITH USERNAME HERE:",
+			// 	date,
+			// 	amount,
+			// 	cost,
+			// );
 			storeData(date, amount, cost, distance);
 		});
 	$(function () {
