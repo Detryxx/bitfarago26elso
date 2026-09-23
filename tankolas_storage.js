@@ -1,18 +1,12 @@
 let listEfficiency = false;
-<<<<<<< HEAD
 const table_classes =
 	"m-auto bg-gray-600 w-1/2 border-2 border-black rounded-lg padding text-sm text-left rtl:text-right text-body overflow-hidden text-zinc-100";
-const tr_classes =
-	"odd:bg-neutral-primary even:bg-neutral-secondary-soft border-b border-default";
+const tr_classes = "odd:bg-neutral-primary even:bg-neutral-secondary-soft";
 const text_classes =
 	"rounded-t-lg bg-gray-600 max-w-fit mx-auto mt-3 p-1 text-white font-bold border-x-2 border-t-2 border-black relative top-0.5";
 const delete_classes =
 	"text-white bg-red-600 hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5 cursor-pointer";
 
-=======
-const table_classes = "m-auto bg-gray-600 w-1/2 rounded-lg padding text-sm text-left rtl:text-right text-body";
-const tr_classes = "odd:bg-neutral-primary even:bg-neutral-secondary-soft border-b border-default";
->>>>>>> 12ba46bde259cb87f4ef19917a0932044d3ce24e
 function storeData(date, amount, cost, km) {
 	let record = {
 		date: date,
@@ -119,11 +113,8 @@ function list_by_time() {
 		for (month in data[year]) {
 			let sum = 0;
 			const table = document.createElement("table");
-<<<<<<< HEAD
-=======
 			const body = document.createElement("tbody");
 			table.appendChild(body);
->>>>>>> 12ba46bde259cb87f4ef19917a0932044d3ce24e
 			table_classes.split(" ").forEach((e) => table.classList.add(e));
 
 			data[year][month].forEach((item) => {
