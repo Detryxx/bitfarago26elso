@@ -110,10 +110,6 @@ function list_by_time() {
 	
 
 	for (year in data) {
-		// const ytext = document.createElement("p");
-		// ytext.innerHTML = `${year}`;
-		// ytext_classes.split(" ").forEach((e) => ytext.classList.add(e));
-		// list.appendChild(ytext);
 		for (month in data[year]) {
 			let sum = 0;
 			const table = document.createElement("table");
