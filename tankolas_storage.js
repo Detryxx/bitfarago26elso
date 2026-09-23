@@ -252,6 +252,13 @@ function cleardate() {
 	document.getElementById("tankolasRange").value = "-";
 }
 
+function stripMonth(month) {
+	if (month[0] == "0") {
+		return month[1]
+	}
+	else { return month }
+}
+
 function listByMonths(data) {
 	let years = [];
 	let result = {};
@@ -269,6 +276,7 @@ function listByMonths(data) {
 			),
 		);
 	});
+	console.log(years)
 	
 	
 	for (let key in result) {
@@ -276,14 +284,14 @@ function listByMonths(data) {
 		for (let record in result[key]) {
 			
 			if (
-				!Object.keys(months).includes(result[key][record]["date"].split("-")[1])
+				!Object.keys(months).includes(stripMonth(result[key][record]["date"].split("-")[1]))
 			) {
-				months[result[key][record]["date"].split("-")[1]] = [];
-				months[result[key][record]["date"].split("-")[1]].push(
+				months[stripMonth(result[key][record]["date"].split("-")[1])] = [];
+				months[stripMonth(result[key][record]["date"].split("-")[1])].push(
 					result[key][record],
 				);
 			} else {
-				months[result[key][record]["date"].split("-")[1]].push(
+				months[stripMonth(result[key][record]["date"].split("-")[1])].push(
 					result[key][record],
 				);
 			}
@@ -291,7 +299,7 @@ function listByMonths(data) {
 		result[key] = months;
 	}
 
-	// console.log(result);
+	console.log(result);
 	return result;
 }
 
