@@ -1,5 +1,6 @@
 let listEfficiency = false;
-const table_classes = "";
+const table_classes = "m-auto bg-gray-600 w-1/2 rounded-lg padding text-sm text-left rtl:text-right text-body";
+const tr_classes = "odd:bg-neutral-primary even:bg-neutral-secondary-soft border-b border-default";
 function storeData(date, amount, cost, km) {
 	let record = {
 		date: date,
